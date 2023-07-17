@@ -32,7 +32,7 @@ The sheets of this spreadsheet are as follows:
 * Setup - describes 10 basic Colors or HuePrefixes each with their 4 intermediate Hues.
 * HuePages - describes how HuePrefix and intermediate Hues define each HuePage.
 * Conversion Lists - describes the mapping between Munsell Keys and RGB Color values.
-* Grey lists - shows the 11 grey values that are defined along the vertical shaft mentioned above from black at the bottom to white at the top.
+* Grey lists - shows the 11 grey values defined along the vertical shaft mentioned above, ranging from black at the bottom to white at the top.
 * Value-Chroma - is a macro-driven page that shows Values and Chroma for a given HuePage defined by its HuePrefix and Hue using the dropdowns at the top left. 
 * HuePrefix-Chroma - is a macro-driven page that shows the 10 HuePrefix pages for a selected Value and Hue using the dropdowns at the top left.
 * Hue-Chroma - this macro-driven page shows Hue and Chroma for a selected HuePrefix and Value using the dropdowns at the top left.
@@ -56,7 +56,7 @@ with a total of 2,734 Color Chips
 ## The Munsell Color Chips  
 Munsell Color Tree models are available at many retail outlets, including Amazon.com. These models use Pantone paint chips, which explains the hight cost.
 
-Each Color Chip in the `Conversion Lists` sheet has a unique RGB Color Value Munsell Color Key. The Munsell Color Key encoding format is:    
+Each Color Chip in the `Conversion Lists` sheet has a unique RGB Color Value and its Munsell Color Key. The Munsell Color Key encoding format is:    
 ```
     (<Hue><HuePrefix>)-<Value>-<Chroma>
 ```
