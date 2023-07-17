@@ -62,10 +62,10 @@ Each Color Chip in the `Conversion Lists` sheet has a unique RGB Color Value and
 ```
 
 For example, Munsell Key `10.0RP-3-12` decodes to   
-    HuePrefix = `RP`   
-    Hue = `10.0`  
-    Value = `3`  
-    Chroma = `12`  
+* HuePrefix = `RP`   
+* Hue = `10.0`  
+* Value = `3`  
+* Chroma = `12`  
 
 So, in 3-D Munsell space this chip has location  
 HuePage=`10.0RP` (or Page#=`40`), Row=`3`, Column=`12`. 
