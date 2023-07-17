@@ -70,7 +70,7 @@ For example, Munsell Key `10.0RP-3-12` decodes to
 So, in 3-D Munsell space this chip has location  
 HuePage=`10.0RP` (or Page#=`40`), Row=`3`, Column=`12`. 
 
-This example Munsell Color Key is at row `2689`, column `F` in the `Conversion List` table. The corrsponding RGB Color Value is next to it at column `G` is `149,0,69`.
+This example Munsell Color Key is at row `2689`, column `F` in the `Conversion List` table. The corrsponding RGB Color Value next to it at column `G` is `149,0,69`.
 
 ## Conclusion  
 Given this interpretation of the Munsell Color Space, the `Munsell-to-RGB-Tables` spreadsheet should be sufficient for building a responsive single page web application that can be used to explore this unique model of color based on human visual perception.
