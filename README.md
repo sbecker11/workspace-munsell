@@ -2,7 +2,9 @@
 Based on Conversions Between the Munsell and sRGB Colour Systems <br/>	
 by	Paul Centore © 26 April 2013		
 
-<a href="https://www.andrewwerth.com/aboutmunsell/"><img src="https://www.andrewwerth.com/wp-content/uploads/2013/08/munsellicon.jpg"><br/>Virtual Munsell Color Wheel<br/> by Andrew Werth © 2023<br/>All rights reserved.</a>
+<a href="http://www.andrewwerth.com/color/"><img src="https://www.andrewwerth.com/wp-content/uploads/2013/08/munsellicon.jpg"><br/>Virtual Munsell Color Wheel<br/> by Andrew Werth © 2023<br/>All rights reserved.</a>
+
+Click on different Hues in Andrew Worth's color wheel to see the its Hue Page. Notice how each Hue Page has a different shape but they are common in that the left-most column has diminished Chroma (or saturation) and Chroma increases towards the right-most column. The bottom-most row has the lowest Value and the highest rows have the highest Values.
 
 ### Related references  
 http://www.andrewwerth.com/color/
@@ -11,12 +13,12 @@ http://www.huevaluechroma.com/011.php
 
 ## The Munsel Color System
 
-<img src="https://munsell.com/wp-content/uploads/2015/08/munsell-color-tree-blue-green.jpg" width=33% height=33%>
-
 The Munsell Color system, is based on rigorous measurements of human subjects' visual responses to color, putting it on a firm experimental scientific basis. Because of this basis in human visual perception, Munsell's system has outlasted its contemporary color models, is still in wide use today.  (see Wikipedia/Munsell_color_system)
 
 ## The 3-D Color Space
 Munsell's Color Conversion List describes the mapping between the RGB Color Space and the Munsell Color Space of Hue, Value and Chroma. It was created using experimental human observations. There is no simple linear equation for associating Munsell Color Keys with RGB color values. These associations require table lookups.  
+
+<img src="https://munsell.com/wp-content/uploads/2015/08/munsell-color-tree-blue-green.jpg" width=33% height=33%>
 
 ## The Munsell Color Tree
 The Munsell Color Space can be visualized and explored as a set of Hue Pages all oriented perpendicular to a horizontal base, all connected to a vertical shaft at the center of the flat base. Each page of this Tree is rotated some number of degrees about the vertical axis of the shaft. The color Red is typically set to be 0 degress. Then going counter-clockwise, the next Color or HuePrefix, Yellow, is set at 72 degrees. The other Hue Pages have increasing degree headings up to Red-Purple, which has a setting of 324 degrees.  The next hue then comes back to Red at 360 or 0 degrees.
