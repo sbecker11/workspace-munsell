@@ -95,9 +95,9 @@ so `351-10.0RP.png` decodes to
 
 The 3D model for the Virtual 3-D Munsell Color Tree	is the set of HuePages, each projected on a plane oriented perpendicular to the horizon. All HuePages connect to a vertical "GreyShaft" at the center.
 
-The vertical GreyShaft should have a diameter that matches the ColorChip width in the HuePages. It should have 11 rows of equal length that match the row height and spacing of the ColorChips. Each row should be given grey values that rane from 0 (#000) to white (#fff) as shown in the "Grey lists" page of the spreadsheet.
+The vertical GreyShaft should have a diameter that matches the ColorChip width in the HuePages. It should have 11 rows of equal length that match the row height and spacing of the ColorChips. Each row on the GreyShaft should be given grey values that rane from 0 (#000) to white (#fff) as shown in the "Grey lists" page of the spreadsheet.
 
-HuePages are placed within a gap distance to align with the Grey Shaft on their zero-chroma side. HuePages have vertical values that only range from 1 to 9, so only those rows should align with the rows of the GreyShaft.
+HuePages are placed within a gap distance to the Grey Shaft on their zero-chroma side. HuePages have vertical values that only range from 1 to 9, so HuePage rows should align with the 1 thru 9 rows of the GreyShaft.
 
 Each HuePage is rotated some number of degrees about the vertical axis of the GrayShaft. The color Red is typically set to be 0 degress. Then going clockwise, the next Color or HuePrefix, Yellow, is set at 72 degrees. The other Hue Pages have increasing degree headings up to Red-Purple, which has a setting of 324 degrees. The next hue then comes back to Red at 360 or 0 degrees.
 
