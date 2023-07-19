@@ -80,6 +80,17 @@ This example Munsell Color Key is at row `2689`, column `F` in the `Conversion L
 
 ## Implementation
 
+Matthew Davis uses Vanilla javascript (not three.js) to create this magnificent orthographic viewer of a random collection of RGB color cubes.
+
+![3D color selector by Matthew Davis](https://shawn.beckerstudio.com/wp-content/uploads/2023/07/color-selector-50.gif)
+
+  <span>See the  <a href="https://codepen.io/gametroll/pen/jOQyYZN">full screen 3D color selector Pen</a>
+   on <a href="https://codepen.io">CodePen</a>.
+
+For this project, we need to replace the 3D color cubes with flat  ColorChips arranged as shown in each HuePage.
+
+### HuePages and ColorChips
+
 This repo contains the `Munsell-to-RGB-Tables.xlsm` folder contains 40 png files, one for each HuePage. For example, this is `351-10.0RP.png`
 
 ![351-10.0RP.png](https://shawn.beckerstudio.com/wp-content/uploads/2023/07/351-10.0RP-50.png)
@@ -91,7 +102,7 @@ Each filename has format:
 so `351-10.0RP.png` decodes to  
 `degrees`=351, `Hue`=10.0, `HuePrefix`=RP  
 
-## The 3D model, GreyShaft and HuePages
+## The 3D model and the GreyShaft 
 
 The 3D model for the Virtual 3-D Munsell Color Tree	is the set of HuePages, each projected on a plane oriented perpendicular to the horizon. All HuePages connect to a vertical "GreyShaft" at the center.
 
@@ -106,18 +117,21 @@ Each HuePage in the HuePages folder has the degrees defined as the filename's 3-
 When loading these PNG image files, make the grey background color transparent and crop each image at top and bottom to remove the title text. Retain the ColorChip boundaries. The horizontal width of each image can be trimmed to fit the existing ColorChips, but HuePage edges should not be visible.
 
 ## 3D model orientation and position
-1. The vvertical axis of the model always aligns with that of the viewport and viewr
+1. The vertical axis of the model always aligns with that of the viewport and viewr
 2. The tree should be positioned at a reasonable fixed distance from the ground plane
-3. Viewer can rotate the tree about its vertical axis using a horizontal slider widget located below the canvas
-4. Viewer can tilt the tree torwards or away with another slider widget  
-5. Viewer can zoom in or zoom out from the tree within reasonable limits with another slider widget
+3. Viewer can rotate the tree about its vertical axis using click and drag  
+
+Removed
+~~4. Viewer can tilt the tree torwards or away with another slider widget~~  
+~~5. Viewer can zoom in or zoom out from the tree within reasonable limits with another slider widget~~
 
 ## Lighting
 1. The tree should cast a blurred shadow on the ground plane
 2. Subtle lighting from above, behind, left of viewer
 
-## HuePages and ColorChips
-1. Viewer can use mouse to click on a 3D HuePage or select one from hz slider widget to view it as a flat image that replaces the view of the tree
+## HuePage mode
+1. Viewer can click on a HuePage to view it in HuePage mode, where the HuePage replaces the view of the tree
 2. On ColorCell hover, Munsell Key value and RGB values  are displayed at the right side of the hz slider widgets 
 3. On ColorCell click, the scene background is changed to match its RGB value
+
 
