@@ -117,9 +117,9 @@ Each HuePage in the HuePages folder has the degrees defined as the filename's 3-
 When loading these PNG image files, make the grey background color transparent and crop each image at top and bottom to remove the title text. Retain the ColorChip boundaries. The horizontal width of each image can be trimmed to fit the existing ColorChips, but HuePage edges should not be visible.
 
 ## 3D model orientation and position
-1. The vertical axis of the model always aligns with that of the viewport and viewr
-2. The tree should be positioned at a reasonable fixed distance from the ground plane
-3. Viewer can rotate the tree about its vertical axis using click and drag  
+1. The vertical axis of the model always aligns with that of the viewport and viewer
+2. The tree should be floating at a reasonable fixed distance from the ground plane
+3. Viewer can rotate the tree about its vertical axis using click and drag on any of its pages 
 
 Removed  
 ~~4. Viewer can tilt the tree torwards or away with another slider widget~~  
@@ -131,7 +131,7 @@ Removed
 
 ## HuePage mode
 1. Viewer can click on a HuePage to view it in HuePage mode, where the HuePage replaces the view of the tree
-2. On ColorCell hover, Munsell Key value and RGB values  are displayed at the right side of the hz slider widgets 
+2. When viewing just the HuePage, on ColorCell hover, Munsell Key value and RGB values  are displayed at the right side of the hz slider widgets 
 3. On ColorCell click, the scene background is changed to match its RGB value
 
 
