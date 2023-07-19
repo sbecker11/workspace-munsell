@@ -91,7 +91,7 @@ For this project, we need to replace the 3D color cubes with flat  ColorChips ar
 
 ### HuePages and ColorChips
 
-This repo contains the `Munsell-to-RGB-Tables.xlsm` folder contains 40 png files, one for each HuePage. For example, this is `351-10.0RP.png`
+This repo contains the `Munsell-to-RGB-Tables.xlsm` folder, which contains 40 png files, one for each HuePage. For example, this is `351-10.0RP.png`
 
 ![351-10.0RP.png](https://shawn.beckerstudio.com/wp-content/uploads/2023/07/351-10.0RP-50.png)
 
