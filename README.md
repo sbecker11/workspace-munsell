@@ -87,7 +87,7 @@ Matthew Davis uses Vanilla javascript (not three.js) to create this magnificent 
   <span>See the  <a href="https://codepen.io/gametroll/pen/jOQyYZN">full screen 3D color selector Pen</a>
    on <a href="https://codepen.io">CodePen</a>.
 
-For this project, we need to replace the 3D color cubes with flat  ColorChips arranged as shown in each HuePage.
+For this project, we need to extend the model by replacing the 3D color cubes with flat ColorChips arranged as shown in each HuePage.
 
 ### HuePages and ColorChips
 
