@@ -121,7 +121,7 @@ When loading these PNG image files, make the grey background color transparent a
 2. The tree should be positioned at a reasonable fixed distance from the ground plane
 3. Viewer can rotate the tree about its vertical axis using click and drag  
 
-Removed
+Removed  
 ~~4. Viewer can tilt the tree torwards or away with another slider widget~~  
 ~~5. Viewer can zoom in or zoom out from the tree within reasonable limits with another slider widget~~
 
