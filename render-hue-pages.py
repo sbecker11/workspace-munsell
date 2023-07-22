@@ -59,7 +59,7 @@ def main():
             draw.rectangle([x1, y1, x2, y2], fill=color + (255,))  # Set alpha channel to 255 (opaque)
 
         # Save the image to a PNG file
-        image_path = os.path.join(image_folder, f'{image_file}.png')
+        image_path = os.path.join(image_folder, image_file)
         image.save(image_path)
 
         print(f"Saved image for {page_hue_name}: {image_path}")
