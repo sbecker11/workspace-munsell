@@ -5,11 +5,16 @@ The objective of this project is to exend this work done by Andrew Worth:
 
 To a 3-D virtual app that approximates The Pantone Munsell Color Tree:
 
-<img src="https://munsell.com/wp-content/uploads/2015/08/munsell-color-tree-blue-green.jpg" width=33% height=33%>
+<a href="https://www.amazon.com/X-Rite-M70115-Munsell-Color-Tree/dp/B007E9JERU/ref=asc_df_B007E9JERU/?tag=hyprod-20&linkCode=df0&hvadid=167144081759&hvpos=&hvnetw=g&hvrand=13670204540587953849&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9029705&hvtargid=pla-309540220012&psc=1"><img src="https://munsell.com/wp-content/uploads/2015/08/munsell-color-tree-blue-green.jpg" width=33% height=33%><br/>A Pantone Munsell Color Tree for sale at Amazon.com</a>
+
+
+<a href="https://www.gettyimages.com/detail/news-photo/an-old-fashioned-rolodex-7-june-2005-smh-picture-by-quentin-news-photo/539713049"><img src="https://media.gettyimages.com/id/539713049/photo/an-old-fashioned-rolodex-7-june-2005-smh-picture-by-quentin-jones.jpg?s=1024x1024&w=gi&k=20&c=N4Aijdh4_3DOFY5vHa6pumlo96pwzt05FV5BD7dRukM=" width=33% height=33%><br/>An old-fashioned rolodex</a>
+
+Picture replacing each index card of this old-fashioned rolodex with a transparent index card with a matrix of ColorChips. And then placing it on its side, so its axis is vertical.  
 
 ## Andrew Worth's color wheel  
 
-Click on different Hues in Andrew Worth's color wheel to see the its Hue Page. Notice how each Hue Page has a different shape but they are common in that the left-most column has diminished Chroma (or saturation) and Chroma increases towards the right-most column. The bottom-most row has the lowest Value and the highest rows have the highest Values.
+Regarding the top-most image, click on the image to open Andrew Worth's site. Then click on different any Hue in the circular color wheel to see the its Hue Page. Notice how each Hue Page has a different shape but they are common in that the left-most column has diminished Chroma (or saturation) and Chroma increases towards the right-most column. The bottom-most row has the lowest Value and the highest rows have the highest Values.
 
 ## The Munsel Color System
 
