@@ -107,6 +107,8 @@ Each filename has format:
 so `351-10.0RP.png` decodes to  
 `degrees`=351, `Hue`=10.0, `HuePrefix`=RP  
 
+![the Munsell Color Chart as an animaged gif](animated.gif)
+
 ## The 3D model and the GreyShaft 
 
 The 3D model for the Virtual 3-D Munsell Color Tree	is the set of HuePages, each projected on a plane oriented perpendicular to the horizon. All HuePages connect to a vertical "GreyShaft" at the center.
