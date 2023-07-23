@@ -105,9 +105,11 @@ Each filename has format:
 <degrees>-<Hue><HuePrefix>.png
 ```
 so `351-10.0RP.png` decodes to  
-`degrees`=351, `Hue`=10.0, `HuePrefix`=RP  
+`degrees`=351, `Hue`=10.0, `HuePrefix`=RP 
 
-![the Munsell Color Chart as an animaged gif](animated.gif)
+## The HuePages defined in the Munsell-to-RGB-Tables as an animated gif
+
+![the Munsell Color Chart as an animated gif](animated-25.gif)
 
 ## The 3D model and the GreyShaft 
 
