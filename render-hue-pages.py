@@ -1,6 +1,8 @@
 import os
 import pandas as pd
 from PIL import Image, ImageDraw
+import color_chip_module
+from plot_colors import plot_color_histograms
 
 width = 75
 height = 75
@@ -32,19 +34,22 @@ def create_hue_page(page_hue_name, cl_df, gr_df, huepages_df):
             #     rgb_counter[rgb] = 0
             # rgb_counter[rgb] += 1
             r, g, b = map(int, rgb.split(','))
-            key = str(row['Chip_Color_Key'+suffix])
-            rows_data.append((x1, y1, x2, y2, (r, g, b), key))
+            color_key = str(row['Chip_Color_Key'+suffix])
+            rows_data.append((x1, y1, x2, y2, (r, g, b), color_key, chroma_column, value_row))
 
         # print("value_row:", value_row, "rgb_counter:", rgb_counter);
     image_file = huepages_df.loc[huepages_df.index == page_hue_name, 'Page_Image_File'].values[0]
     return rows_data, image_file
 
+color_chip_module.createFile('color_chips.js')
+color_chip_module.addLine("export const flatColorChips = [")
+
 def main():
-    excel_file_path = "Munsell-to-RGB-Tables.xlsm"
+    excel_colorChipFile = "Munsell-to-RGB-Tables.xlsm"
     image_folder = "HuePagesRendered"
 
     # Read the "Conversion Lists" sheet into a DataFrame
-    xl = pd.ExcelFile(excel_file_path)
+    xl = pd.ExcelFile(excel_colorChipFile)
     cl_df = xl.parse("Conversion Lists")
 
     # Calculate the before_cols before the merge
@@ -86,7 +91,8 @@ def main():
 
     # Gather the list of page_hue_names from distinct Page_HueName values in cl_df
     page_hue_names = cl_df['Page_HueName'].unique()
-
+    page_hue_number = 1;
+    colors = []
     # Process each page_hue_name and create the images
     for page_hue_name in page_hue_names:
         rows_data, image_file = create_hue_page(page_hue_name, cl_df, gr_df, huepages_df)
@@ -98,14 +104,31 @@ def main():
         draw = ImageDraw.Draw(image)
 
         # Draw the filled rectangles on the image
-        for x1, y1, x2, y2, color, key in rows_data:
+        # rows_data.append((x1, y1, x2, y2, (r, g, b), color_key, chroma_column, value_row))
+        for x1, y1, x2, y2, color, color_key, chroma_column, value_row in rows_data:
             draw.rectangle([x1, y1, x2, y2], fill=color + (255,))  # Set alpha channel to 255 (opaque)
+            r,g,b = color
+            obj = {
+                "x1": x1, "y1":y1, "x2":x2, "y2":y2,
+                "page_hue_number": page_hue_number,
+                "page_hue_name": page_hue_name, 
+                "value_row": value_row, 
+                "chroma_column": chroma_column,
+                "color_key": color_key,
+                "r": r, "g":g, "b":b 
+            }
+            js_object_str = "{ " + ', '.join(f"{key}: '{value}'" for key, value in obj.items()) + " },"
+            color_chip_module.addLine(js_object_str)
+            colors.append(color)
 
         # Save the image to a PNG file
         image_path = os.path.join(image_folder, image_file)
         image.save(image_path)
 
-        print(f"Saved image for {page_hue_name}: {image_path}")
+        print(f"Saved image for {page_hue_number} {page_hue_name}: {image_path}")
+        page_hue_number += 1
+    color_chip_module.addLine("];")
+    plot_color_histograms(colors)
 
 if __name__ == "__main__":
     main()
