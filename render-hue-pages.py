@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from PIL import Image, ImageDraw
 import color_chip_module
-from plot_colors import plot_color_histograms
+from histogram.plot_color_histograms import plot_color_histograms
 
 width = 75
 height = 75

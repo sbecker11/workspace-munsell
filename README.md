@@ -109,7 +109,8 @@ so `351-10.0RP.png` decodes to
 
 ## The HuePages defined in the Munsell-to-RGB-Tables as an animated gif
 
-![the Munsell Color Chart as an animated gif](animated-25.gif)
+<img src="movies/animated-25.gif"><br/>
+the Hue Pages of the Munsell Color Chart as an animated gif</a>
 
 ## The 3D model and the GreyShaft 
 
@@ -145,3 +146,17 @@ Removed
 
 
 ## See my related project <a href="https://github.com/sbecker11/workspace-rolodex">workspace-rolodex</a>
+
+## Check out the inspirational work of others  
+
+<a href="https://www.researchgate.net/profile/Caroline-Larboulette"><img src="https://www.researchgate.net/profile/Caroline-Larboulette/publication/220795296/figure/fig13/AS:668413223530499@1536373539330/3D-plot-of-the-Munsell-Color-Order-System_W640.jpg" width=33% height=33%><br/>from Caroline Larboulette</a>
+
+
+<a href="https://www.youtube.com/watch?v=106qfBwZgM4"><img src="https://i.ytimg.com/vi/106qfBwZgM4/maxresdefault.jpg" width=33% height=33%><br/>Munsell Color Space - basic color theory
+Uploaded: Jun 2, 2020<a>
+
+<a href="https://commons.wikimedia.org/w/index.php?curid=8401562"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Munsell_1943_color_solid_cylindrical_coordinates.png/800px-Munsell_1943_color_solid_cylindrical_coordinates.png?20200120011336" width=33% height=33%><br/>A representation of the Munsell Color Solid Cylindrical Coordinates.<br/>sRGB approximations of the 1943 Munsell color notations.<br/>By SharkD - Own work, CC BY-SA 3.0</a>
+
+
+
+<a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fhbfs.wordpress.com%2F2018%2F06%2F12%2Fmunsell-colorspace-colorspaces-ix%2F&psig=AOvVaw0TgZry3xAaarO93rYUAU1j&ust=1690674964514000&source=images&cd=vfe&opi=89978449&ved=0CBEQjhxqGAoTCKCZpJfNsoADFQAAAAAdAAAAABCgAQ"><img src="https://hbfs.files.wordpress.com/2018/05/munsell.gif" width=33% height=33%><br/>Munsell Colorspace (Colorspaces IX) | Harder, Better, Faster, Stronger
