@@ -1,5 +1,5 @@
 import unittest
-from MunsellDataFrame import MunsellDataFrame, SortOrder
+from munsell_data_frame import MunsellDataFrame, SortOrder
 
 class TestMunsellDataFrame(unittest.TestCase):
     

@@ -18,7 +18,10 @@ class MunsellDataFrame:
     }
 
     def __init__(self, data=None, index=None, columns=None, dtype=None, copy=False):
-        data = data if data is not None else []
+        if data is None:
+            data = pd.DataFrame(columns=self._dtypes.keys())
+        else:
+            data = pd.DataFrame(data=data, index=index, columns=columns, dtype=dtype, copy=copy)
         self.df = pd.DataFrame(data=data, index=index, columns=columns, dtype=dtype, copy=copy)
         self._set_dtypes()
 
@@ -26,16 +29,19 @@ class MunsellDataFrame:
         for col, dtype in self._dtypes.items():
             if col in self.df.columns:
                 self.df[col] = self.df[col].astype(dtype)
-
+    
+    def get_internal_df(self):
+        return self.df
+    
     def append_rows(self, rows):
         if self.df.empty:
             self.__init__(columns=self._dtypes.keys())
         for row in rows:
             self.df.loc[len(self.df)] = row
         self._set_dtypes()
-
-    def to_csv(self, filename):
-        self.df.to_csv(filename, index=False)
+        
+    def to_dict(self, *args, **kwargs):
+        return self.df.to_dict(*args, **kwargs)
 
     @classmethod
     def from_csv(cls, filename):
@@ -47,6 +53,7 @@ class MunsellDataFrame:
 
     @classmethod
     def from_parquet(cls, filename):
+        filename = filename.strip()
         df = pd.read_parquet(filename, engine='pyarrow')
         return cls(data=df.values, columns=df.columns)
 
@@ -75,4 +82,8 @@ class MunsellDataFrame:
     @property
     def empty(self):
         return self.df.empty
+    
+    @property
+    def columns(self):
+        return self.df.columns
 
