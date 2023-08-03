@@ -3,3 +3,7 @@ codewhizz/
 chat.openai.com/
 venv/
 .vscode/
+*/*__pycache__
+*/*.__pycache__
+*.pyc
+.coverage
