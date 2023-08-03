@@ -2,15 +2,21 @@
 import pandas as pd
 import numpy as np
 from munsell_data_frame import MunsellDataFrame, SortOrder
+import os
+import argparse
 
 # reads an Excel spreadsheet with macros and writes a 
-def main():
-    
-    excel_colorChipFile = "Munsell-to-RGB-Tables.xlsm"
+def process_excel_file_macro(excel_file_macro_dir):
+    # output
+    parquet_file_macro = excel_file_macro_dir + "parqet_file_macro.parquet"
+
+    # input
+    excel_file_macro = excel_file_macro_dir + "Munsell-to-RGB-Tables.xlsm"
+    sheet = "Conversion Lists"
 
     # Read the "Conversion Lists" sheet into a DataFrame
-    excel_file = pd.ExcelFile(excel_colorChipFile)
-    df = excel_file.parse("Conversion Lists")
+    excel_file = pd.ExcelFile(excel_file_macro)
+    df = excel_file.parse(sheet)
     
     # df has columns:
     # conv_list_columns = df.columns
@@ -52,15 +58,27 @@ def main():
 
     munsell_df = MunsellDataFrame(df)
     
-    parquet_filename = "munsell.parquet"
-    munsell_df.to_parquet(parquet_filename)
+    munsell_df.to_parquet(parquet_file_macro)
     
-    check_df = MunsellDataFrame.from_parquet(parquet_filename)
+    check_df = MunsellDataFrame.from_parquet(parquet_file_macro)
     assert( check_df.shape == munsell_df.shape )
     
     print(f"munsell_df.shape: {munsell_df.shape}")
-    print("written to ", parquet_filename)
+    print("written to ", parquet_file_macro)
 
 if __name__ == "__main__":
-    main()
+    
+    parser = argparse.ArgumentParser(description='Convert Excel File Macro to Parquet File Macro.')
+    parser.add_argument('--dir', required=True, help='excel file macro directory')
+
+    args = parser.parse_args()
+
+    # Check if the excel_file_macro directory exists and is read/writeable
+    if not os.path.isdir(args.dir) or not os.access(args.dir, os.R_OK | os.W_OK):
+        print(f"Error: The directory {args.dir} does not exist or is not readable.")
+        exit(1)
+    
+    excel_file_macro_dir  = args.dir + "/"
+    process_excel_file_macro(excel_file_macro_dir)
+    
     print("done")

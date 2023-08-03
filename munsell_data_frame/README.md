@@ -15,3 +15,4 @@ This package can also be added to your venv
 by adding `-e ./munsell_data_frame` to the parent
 `requirements.txt` file as long as it is called using
 `pip install -r requriements.txt`
+python -m pip install --editable .
