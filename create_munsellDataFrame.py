@@ -1,7 +1,7 @@
 
 import pandas as pd
 import numpy as np
-from MunsellDataFrame import MunsellDataFrame
+from MunsellDataFrame import MunsellDataFrame, SortOrder
 
 def main():
     
@@ -32,20 +32,26 @@ def main():
         'Chip_Color_Key': 'color_key'
     })
     
+
     # To compute page_hue_number 1 to 40 from page_hue_name
     # Sort the DataFrame by 'page_hue_name'
-    df = df.sort_values('page_hue_name')
+    sort_orders = {
+        'page_hue_name': SortOrder.ASC
+    }
+    sorted_df = df.sort_values(by=list(sort_orders.keys()), ascending=[sort_order == SortOrder.ASC for sort_order in sort_orders.values()])
+    
     # Assign each unique 'page_hue_name' an integer from 1 to number of unique page_hue_names (40)
     df['page_hue_number'] = df.groupby('page_hue_name').ngroup() + 1
 
-    df_columns = df.columns
-    print("df_columns:", df_columns)
-    mdf = MunsellDataFrame()
-    mdf_columns = mdf.columns
-    print("mdf_columns:", mdf_columns)
-    assert (df_columns == mdf_columns).all(), "DataFrames have different columns"
-
-
+    print("df.columns:")
+    print( df.columns)
+    
+    empty_mdf = MunsellDataFrame()
+    print("empty_mdf.columns:")
+    print(empty_mdf.columns)
+    
+    assert (len(df.columns) == len(empty_mdf.columns)), "DataFrames must have same number of columns"
+    assert (df.columns == empty_mdf.columns).all(), "DataFrames have different columns"
 
     munsell_df = MunsellDataFrame(df)
     
