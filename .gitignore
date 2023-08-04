@@ -7,3 +7,6 @@ venv/
 */*.__pycache__
 *.pyc
 .coverage
+*/hue_page_movie/*.png
+*/munsell_data_frame/*
+munsell_data_frame/build/lib/tests/test_MunsellDataFrame.py

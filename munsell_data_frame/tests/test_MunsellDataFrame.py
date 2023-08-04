@@ -13,7 +13,7 @@ class TestMunsellDataFrame(unittest.TestCase):
         df = MunsellDataFrame(rows)
         return df
         
-    def test_filter_by_column_values(self):
+    def test_filter_by_columns(self):
         
         df = self.create_test_munsell_df()
         # print("\noriginal:\n", df)
@@ -23,7 +23,7 @@ class TestMunsellDataFrame(unittest.TestCase):
             'value_row': 6
         }
 
-        filtered_df = df.filter_by_column_values(filters)
+        filtered_df = df.filter_by_columns(filters)
         # print("\nfiltered:\n", filtered_df)
         
         self.assertEqual(filtered_df.shape[0], 1, "wrong number of rows")
@@ -39,7 +39,7 @@ class TestMunsellDataFrame(unittest.TestCase):
         filters = {
             'color_key': 'change'
         }
-        filtered_df = df.filter_by_column_values(filters)
+        filtered_df = df.filter_by_columns(filters)
         # print("\nfiltered:\n", filtered_df)
         # print("\nempty?:\n", filtered_df.empty)
 

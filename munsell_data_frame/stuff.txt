@@ -1,1 +1,0 @@
--e git+https://github.com/sbecker11/workspace-munsell.git@76181b46a8720691b40d1a046aff82404b65bab6#egg=munsell_data_frame&subdirectory=munsell_data_frame

@@ -51,7 +51,6 @@ if __name__ == "__main__":
         print(f"Error: The file {parquet_file} does not exist or is not readable.")
         exit(1)
         
-    
     main(js_file, parquet_file)
 
     print("done")
