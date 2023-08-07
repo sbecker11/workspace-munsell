@@ -262,21 +262,6 @@ class MunsellDataFrame:
             
         return unique_hue_page_rows_mdf
     
-    def groupby_color_key(self):
-        # all MunsellDataFrame coluamns
-        #['page_hue_number', 'page_hue_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
-        
-        # using color_key as the index to group all r,g,b values for all rows with that index
-        reduced_df = self.df[['color_key','r','g','b']]        
-        
-        # replace with average color values for each unique eolor_key index
-        colors_means_df = reduced_df.groupby('color_key').mean()
-        
-        # add the color_key index as a column
-        colors_means_df.reset_index(inplace=True)
-        return MunsellDataFrame(colors_means_df)
-
-    
     def equals(self, other_mdf, verbose:bool=False) -> bool:
         same = self.df.equals(other_mdf.df)
         if verbose:
@@ -285,3 +270,57 @@ class MunsellDataFrame:
             print(f"other.df:\n{other_mdf.df}")
         return same
    
+    def groupby_color_key(self):
+        # all MunsellDataFrame coluamns
+        #['page_hue_number', 'page_hue_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
+        
+        # using color_key as the index to group all r,g,b values for all rows with that index
+        reduced_mdf = self.get_color_key_reduced()
+        reduced_df = reduced_mdf.df
+        
+        # replace with average color values for each unique eolor_key index
+        colors_means_df = reduced_df.groupby('color_key').mean()
+        
+        # add the color_key index as a column
+        colors_means_df.reset_index(inplace=True)
+        
+        return MunsellDataFrame(colors_means_df)
+
+    # return a version of self that has only columns 'color_key','r','g','b'
+    def get_color_key_reduced(self):
+        df_reduced = self.df[['color_key','r','g','b']]
+        return MunsellDataFrame(df_reduced)
+    
+    # return an expacted version of self that has all columns - expanded from color_key
+    def get_color_key_expanded(self):
+        df_copy = self.df.copy(deep=True)
+
+        df_copy[['page_hue_number', 'value_row', 'chroma_column']] = df_copy['color_key'].str.split('-', expand=True).astype(int)
+        mapping = {i+1: name for i, name in enumerate(PAGE_HUE_NAMES)}
+        df_copy['page_hue_name'] = df_copy['page_hue_number'].map(mapping)
+        
+        # reorder to match the original column order
+        df_copy = df_copy[['page_hue_number', 'page_hue_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']]
+        
+        return MunsellDataFrame(df_copy)
+
+
+    @classmethod
+    def get_page_hue_name_from_page_hue_number(cls, page_hue_number):
+        return PAGE_HUE_NAMES[page_hue_number - 1]
+    
+    
+    # @classmethod
+    # def get_page_hue_number_from_color_key(cls, color_key):
+    #     parts = color_key.split("-")
+    #     return int(parts[0])
+    
+    # @classmethod
+    # def get_value_row_from_color_key(cls, color_key):
+    #     parts = color_key.split("-")
+    #     return int(parts[1])
+    # @classmethod
+    
+    # def get_chroma_columns_from_color_key(cls, color_key):
+    #     parts = color_key.split("-")
+    #     return int(parts[2])

@@ -1,6 +1,7 @@
 import unittest
 from munsell_data_frame.MunsellDataFrame import MunsellDataFrame, SortOrder
 import pandas as pd
+from munsell_data_frame.constants import *
 
 class TestMunsellDataFrame(unittest.TestCase):
     
@@ -61,6 +62,26 @@ class TestMunsellDataFrame(unittest.TestCase):
         
         self.assertTrue(result_mdf.equals(expected_mdf)), "MunsellDataFrames are not equal"
   
+    def test_get_color_key_reduced_expanded(self):
+        input_mdf = MunsellDataFrame([
+            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 255, 'g': 0, 'b': 0},
+            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 0, 'g': 255, 'b': 0},
+            {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 0, 'g': 0, 'b': 255},
+            {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 255, 'g': 0, 'b': 255}
+        ])
+        reduced_expected_mdf = MunsellDataFrame([
+            {'color_key': '01-09-05', 'r': 255, 'g': 0, 'b': 0},
+            {'color_key': '01-09-05', 'r': 0, 'g': 255, 'b': 0},
+            {'color_key': '03-06-07', 'r': 0, 'g': 0, 'b': 255},
+            {'color_key': '03-06-07', 'r': 255, 'g': 0, 'b': 255}
+        ])
+        
+        reduced_mdf = input_mdf.get_color_key_reduced()
+        self.assertTrue(reduced_expected_mdf.equals(reduced_mdf)), "reduced != expected"
+
+        expanded_mdf = reduced_mdf.get_color_key_expanded()
+        self.assertTrue(expanded_mdf.equals(input_mdf)), "expanded != input"
+
                 
     def test_append_rows_one_dict(self):
         mdf = MunsellDataFrame()
@@ -210,6 +231,9 @@ class TestMunsellDataFrame(unittest.TestCase):
         mdf = MunsellDataFrame(self.data)
         self.assertEqual(mdf.max_column('chroma_column'), 8)
         
-            
+    def test_get_page_hue_name_from_page_hue_number(self):
+        for i in range(len(PAGE_HUE_NAMES)):
+            self.assertEqual(MunsellDataFrame.get_page_hue_name_from_page_hue_number(i+1), PAGE_HUE_NAMES[i])
+    
 if __name__ == '__main__':
     unittest.main()
