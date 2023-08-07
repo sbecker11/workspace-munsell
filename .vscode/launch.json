@@ -1,0 +1,92 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "test_MunsellDataFrame",
+            "type": "python",
+            "request": "launch",
+            "module": "unittest",
+            "args": ["-v", "tests.test_MunsellDataFrame"],
+            "console": "integratedTerminal",
+            "env": {"PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"}
+        },
+        {
+            "name": "test_MunsellDataFrame with coverage",
+            "type": "python",
+            "request": "launch",
+            "module": "coverage",
+            "args": ["run", "-m", "unittest", "tests.test_MunsellDataFrame"],
+            "console": "integratedTerminal",
+            //"postDebugTask": "coverage-report-task",
+            "env": {
+                "COVERAGE_FILE": "tests/.coverage",
+                "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"
+            }
+        },
+        {
+            "name": "parquet_file_macro_from_excel_file_macro",
+            "type": "python",
+            "request": "launch",
+            "program": "excel_file_macro/parquet_file_macro_from_excel_file_macro.py",
+            "args": ["--dir","excel_file_macro"],
+            "console": "integratedTerminal",
+            "env": {"PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"}
+        },
+        {
+            "name": "parquet_file_long_from_excel_file_long",
+            "type": "python",
+            "request": "launch",
+            "program": "excel_file_long/parquet_file_long_from_excel_file_long.py",
+            "args": ["--dir","excel_file_long"],
+            "console": "integratedTerminal",
+            "env": {"PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"}
+        },
+        {
+            "name": "js_file_macro_from_parquet_file_macro",
+            "type": "python",
+            "request": "launch",
+            "program": "javascript/js_file_from_parquet_file.py",
+            "args": ["--dir","excel_file_macro","--j", "js_file_macro.js", "--p", "parquet_file_macro.parquet"],
+            "console": "integratedTerminal",
+            "env": {"PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"}
+        },
+        {
+            "name": "js_file_long_from_parquet_file_long",
+            "type": "python",
+            "request": "launch",
+            "program": "javascript/js_file_from_parquet_file.py",
+            "args": ["--dir","excel_file_long","--j", "js_file_long.js", "--p", "parquet_file_long.parquet"],
+            "console": "integratedTerminal",
+            "env": {"PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"}
+        },
+        {
+            "name": "hue_page_images_from_parquet_file_macro",
+            "type": "python",
+            "request": "launch",
+            "program": "hue_pages/hue_page_images_from_parquet_file.py",
+            "args": ["--o","excel_file_macro/hue_page_images","--p", "excel_file_macro/parquet_file_macro.parquet"],
+            "console": "integratedTerminal",
+            "env": {"PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"}
+        },
+        {
+            "name": "hue_page_images_from_parquet_file_long",
+            "type": "python",
+            "request": "launch",
+            "program": "hue_pages/hue_page_images_from_parquet_file.py",
+            "args": ["--o","excel_file_long/hue_page_images","--p", "excel_file_long/parquet_file_long.parquet"],
+            "console": "integratedTerminal",
+            "env": {"PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"}
+        },
+        {
+            "name": "histgrams_from_parquet_file_long",
+            "type": "python",
+            "request": "launch",
+            "program": "histogram/histograms_from_parquet_file.py",
+            "args": ["--p", "excel_file_long/parquet_file_long.parquet"],
+            "console": "integratedTerminal",
+            "env": {"PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"}
+        }
+
+
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "coverage-report-task",
+            "type": "shell",
+            "command": "coverage report -m && coverage html -d tests/htmlcov",
+            "presentation": {
+                "reveal": "always"
+            }
+        },
+        {
+            "label": "open-coverage-report-task",
+            "type": "shell",
+            "command": "open tests/htmlcov/index.html",
+            "presentation": {
+                "reveal": "always"
+            }
+        },
+        {
+            "label": "post-debug-task",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": ["coverage-report-task", "open-coverage-report-task"],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        } 
+    ]
+}

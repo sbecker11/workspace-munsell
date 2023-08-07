@@ -2,11 +2,13 @@
 codewhizz/
 chat.openai.com/
 venv/
-.vscode/
 */*__pycache__
 */*.__pycache__
 *.pyc
-.coverage
+tests/.coverage
 */hue_page_movie/*.png
 */munsell_data_frame/*
 munsell_data_frame/build/lib/tests/test_MunsellDataFrame.py
+./keep/*
+tests/.coverage/*
+tests/htmlcov/*

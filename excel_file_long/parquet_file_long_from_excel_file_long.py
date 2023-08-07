@@ -60,7 +60,7 @@ def process_long_excel_file(excel_file_long_dir):
     print("pre-munsell:", df.columns)
 
     munsell_df = MunsellDataFrame(df)
-    munsell_df.create_color_key()
+    munsell_df.set_color_key()
 
     print("munsell_df.columes:", munsell_df.columns)
     
