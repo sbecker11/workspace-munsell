@@ -44,27 +44,23 @@ class TestMunsellDataFrame(unittest.TestCase):
         
         self.assertEqual(sorted_mdf.df['chroma_column'].tolist(), [3,5,7,8], "wrong chroma_column order")
     
-    def test_groupby_positions(self):
-        data = [
-            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '2.5R-9-5', 'r': 255, 'g': 0, 'b': 0},
-            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '2.5R-9-5', 'r': 0, 'g': 255, 'b': 0},
-            {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '7.5R-6-7', 'r': 0, 'g': 0, 'b': 255},
-            {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '7.5R-6-7', 'r': 255, 'g': 0, 'b': 255}
-        ]
-        mdf = MunsellDataFrame(data)
-        self.assertEqual(mdf.shape, (4,8))
+    def test_groupby_color_key(self):
+        input_mdf = MunsellDataFrame([
+            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 255, 'g': 0, 'b': 0},
+            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 0, 'g': 255, 'b': 0},
+            {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 0, 'g': 0, 'b': 255},
+            {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 255, 'g': 0, 'b': 255}
+        ])
+        
+        expected_mdf = MunsellDataFrame([
+            {'color_key': '01-09-05', 'r': 127, 'g': 127, 'b': 0},
+            {'color_key': '03-06-07', 'r': 127, 'g': 0, 'b': 255}
+        ])
 
-        position_colors_df = mdf.groupby_positions()
-        #print(f"position_colors_df.shape: {position_colors_df.shape}")
-        print(f"position_colors_df.df:\n{position_colors_df.df}\n")
-        print(f"position_colors_df.df.index:\n<{position_colors_df.df.index}>\n")
-        print(f"position_colors_df.df.columns:\n<{position_colors_df.df.columns}>\n")
-        for idx, data in position_colors_df.df.groupby(level=0):
-            print("--------")
-            r = data['r']
-            g = data['g']
-            b = data['b']
-            print("color", r, "r.type", type(r), g, "g.type", type(g), b, "b.type:", type(b))
+        result_mdf = input_mdf.groupby_color_key()
+        
+        self.assertTrue(result_mdf.equals(expected_mdf)), "MunsellDataFrames are not equal"
+  
                 
     def test_append_rows_one_dict(self):
         mdf = MunsellDataFrame()
@@ -135,7 +131,7 @@ class TestMunsellDataFrame(unittest.TestCase):
         
     def test_format_color_key(self):
         expected = "09-01-02"
-        result = MunsellDataFrame.format_color_key("9", 1, 2)
+        result = MunsellDataFrame.format_color_key(9, 1, 2)
         self.assertEqual(expected, result)
 
     def test_get_rgb_tuples(self):

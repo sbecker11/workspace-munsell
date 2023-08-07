@@ -262,17 +262,26 @@ class MunsellDataFrame:
             
         return unique_hue_page_rows_mdf
     
-    def groupby_positions(self):
+    def groupby_color_key(self):
+        # all MunsellDataFrame coluamns
         #['page_hue_number', 'page_hue_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
-        # group the entire MunsellDataFrame by all keys except r,g,b and return mean values of r,g and b
-        reduced_df = self.df[['color_key','r','g','b']]
-        print(f"reduced_df:{reduced_df}")
+        
+        # using color_key as the index to group all r,g,b values for all rows with that index
+        reduced_df = self.df[['color_key','r','g','b']]        
+        
+        # replace with average color values for each unique eolor_key index
         colors_means_df = reduced_df.groupby('color_key').mean()
-        # print(f"colors_means_df:\n{colors_means_df}")
-        # colors_std_df = reduced_df.groupby('color_key').std()
-        # print(f"colors_std_df:\n{colors_std_df}")
+        
+        # add the color_key index as a column
+        colors_means_df.reset_index(inplace=True)
         return MunsellDataFrame(colors_means_df)
 
-        
-
+    
+    def equals(self, other_mdf, verbose:bool=False) -> bool:
+        same = self.df.equals(other_mdf.df)
+        if verbose:
+            print(f"self.df:\n{self.df}")
+            print("equals" if same else "does not equal")
+            print(f"other.df:\n{other_mdf.df}")
+        return same
    
