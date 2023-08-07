@@ -1,5 +1,6 @@
 import pandas as pd
 from enum import Enum
+import numpy as np 
 import math
 from .constants import PAGE_HUE_NAMES
 
@@ -143,8 +144,8 @@ class MunsellDataFrame:
     
     # return a single color_key string
     @classmethod
-    def format_color_key(cls, page_hue_number, value_row, chroma_column) -> str:
-        return f"{int(page_hue_number):02d}-{int(value_row):02d}-{int(chroma_column):02d}"
+    def format_color_key(cls, page_hue_number:int, value_row:int, chroma_column:int) -> str:
+        return f"{page_hue_number:02d}-{value_row:02d}-{chroma_column:02d}"
     
     # return a list of all (r,g,b) tuples in the dataframe
     def get_rgb_tuples(self):
@@ -264,7 +265,14 @@ class MunsellDataFrame:
     def groupby_positions(self):
         #['page_hue_number', 'page_hue_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
         # group the entire MunsellDataFrame by all keys except r,g,b and return mean values of r,g and b
-        dfg = self.df.groupby(['page_hue_number', 'page_hue_name', 'value_row', 'chroma_column', 'color_key']).mean()
-        return MunsellDataFrame(dfg)
+        reduced_df = self.df[['color_key','r','g','b']]
+        print(f"reduced_df:{reduced_df}")
+        colors_means_df = reduced_df.groupby('color_key').mean()
+        # print(f"colors_means_df:\n{colors_means_df}")
+        # colors_std_df = reduced_df.groupby('color_key').std()
+        # print(f"colors_std_df:\n{colors_std_df}")
+        return MunsellDataFrame(colors_means_df)
+
+        
 
    
