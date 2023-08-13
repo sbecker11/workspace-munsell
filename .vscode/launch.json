@@ -17,7 +17,7 @@
             "module": "coverage",
             "args": ["run", "-m", "unittest", "tests.test_MunsellDataFrame"],
             "console": "integratedTerminal",
-            //"postDebugTask": "coverage-report-task",
+            "postDebugTask": "coverage-report-task",
             "env": {
                 "COVERAGE_FILE": "tests/.coverage",
                 "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"

@@ -22,7 +22,7 @@ def process_excel_file_macro(excel_file_macro_dir):
     # conv_list_columns = df.columns
     # ['Page_HueName', 'Value_Row', 'Chroma_Column', 'Chip_Color_Key', 'Chip_RGB', 'Chip_Number']
     # MunsellDataFrame has columns:
-    # 'page_hue_number', 'page_hue_name', 'value_row',  'chroma_column', 'color_key', 'r', 'g', 'b']
+    # 'hue_page_number', 'hue_page_name', 'value_row',  'chroma_column', 'color_key', 'r', 'g', 'b']
     
     # replace Chip_RGB string column with r,g and b int columns 
     df['Chip_RGB'] = df['Chip_RGB'].str.replace('(', '').str.replace(')', '')
@@ -33,22 +33,22 @@ def process_excel_file_macro(excel_file_macro_dir):
         
     # rename and reorder df columns           
     df = df.rename(columns={
-        'Page_HueName': 'page_hue_name',
+        'Page_HueName': 'hue_page_name',
         'Value_Row': 'value_row',
         'Chroma_Column': 'chroma_column',
         'Chip_Color_Key': 'color_key'
     })
     
 
-    # To compute page_hue_number 1 to 40 from page_hue_name
-    # Sort the DataFrame by 'page_hue_name'
+    # To compute hue_page_number 1 to 40 from hue_page_name
+    # Sort the DataFrame by 'hue_page_name'
     sort_orders = {
-        'page_hue_name': SortOrder.ASC
+        'hue_page_name': SortOrder.ASC
     }
     sorted_df = df.sort_values(by=list(sort_orders.keys()), ascending=[sort_order == SortOrder.ASC for sort_order in sort_orders.values()])
     
-    # Assign each unique 'page_hue_name' an integer from 1 to number of unique page_hue_names (40)
-    df['page_hue_number'] = df.groupby('page_hue_name').ngroup() + 1
+    # Assign each unique 'hue_page_name' an integer from 1 to number of unique hue_page_names (40)
+    df['hue_page_number'] = df.groupby('hue_page_name').ngroup() + 1
 
     # make sure the incoming df is compatible with MunsellDataFrame
     empty_mdf = MunsellDataFrame()

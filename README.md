@@ -163,3 +163,11 @@ Uploaded: Jun 2, 2020<a>
 <a href="https://www.researchgate.net/profile/Pierre-Boher"><img src="https://www.researchgate.net/profile/Pierre-Boher/publication/323656713/figure/fig2/AS:602216821964800@1520591087705/Color-volumes-of-Rec2020-reference-in-the-Yxy-space-top-left-Yuv-space-top-right_W640.jpg" width=33% height=33%><br/>Color volumes of Rec.2020 reference in the Yxy space (top left),<br/> Yu'v' space (top right), Lab space (bottom left) and in the ICtCp<br/>color space (bottom right). Pierre Boher</a> 
 
 <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fhbfs.wordpress.com%2F2018%2F06%2F12%2Fmunsell-colorspace-colorspaces-ix%2F&psig=AOvVaw0TgZry3xAaarO93rYUAU1j&ust=1690674964514000&source=images&cd=vfe&opi=89978449&ved=0CBEQjhxqGAoTCKCZpJfNsoADFQAAAAAdAAAAABCgAQ"><img src="https://hbfs.files.wordpress.com/2018/05/munsell.gif" width=33% height=33%><br/>Munsell Colorspace (Colorspaces IX) | Harder, Better, Faster, Stronger</a>
+
+<p><a hre="https://www.handprint.com/HP/WCL/color1.html"><img src="https://www.handprint.com/HP/WCL/IMG/conesps1.gif"><br/>light and the eye</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color2.html"><img src="https://www.handprint.com/HP/WCL/IMG/munzcs.gif"><br/>the geometry of color</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color3.html"><img src="https://www.handprint.com/HP/WCL/IMG/att2.gif"><br/>colormaking attributes</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color4.html"><img src="https://www.handprint.com/HP/WCL/IMG/rodint.jpg"><br/>adaptation, anchoring & contrast</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color5.html"><img src="https://www.handprint.com/HP/WCL/IMG/mixmatch.gif"><br/>additive & subtractive color mixing</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color6.html"><img src="https://www.handprint.com/HP/WCL/IMG/maxwell.gif"><br/>do "primary" colors exist?</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color7.html"><img src="https://www.handprint.com/HP/WCL/IMG/scgamut.gif"><br>modern color models</a></p>

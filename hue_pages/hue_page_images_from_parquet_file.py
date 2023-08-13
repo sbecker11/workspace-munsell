@@ -3,7 +3,7 @@ import pandas as pd
 from PIL import Image, ImageDraw
 import argparse
 from munsell_data_frame import MunsellDataFrame
-from munsell_data_frame.constants import PAGE_HUE_NAMES
+from munsell_data_frame.constants import hue_page_nameS
 
 chip_size = 75
 chip_gap = 10
@@ -52,25 +52,25 @@ def main(output_image_folder, parquet_file):
     page_hue_image_height = max_rows * (chip_size + chip_gap) 
     
     total_tuples = 0
-    for page_hue_name in PAGE_HUE_NAMES:
-        page_hue_number = None
+    for hue_page_name in hue_page_nameS:
+        hue_page_number = None
         
         # create an image fore each hue page
         image = Image.new('RGBA', (page_hue_image_width, page_hue_image_height), (0, 0, 0, 0))  # Transparent background
         draw = ImageDraw.Draw(image)
 
         # draw a color chip in the image for each page_hue_tuple
-        # ['page_hue_number', 'page_hue_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
-        page_hue_tuples = munsell_df.get_hue_page_tuples(page_hue_name)
-        for tuplet_page_hue_number, _, value_row, chroma_column, _, r, g, b in page_hue_tuples:
-            page_hue_number = tuplet_page_hue_number
+        # ['hue_page_number', 'hue_page_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
+        page_hue_tuples = munsell_df.get_hue_page_tuples(hue_page_name)
+        for tuplet_hue_page_number, _, value_row, chroma_column, _, r, g, b in page_hue_tuples:
+            hue_page_number = tuplet_hue_page_number
             (x1,y1,x2,y2) = get_chip_geometry(value_row, chroma_column)
             color = (r,g,b)
             draw.rectangle([x1, y1, x2, y2], fill=color + (255,))  # Set alpha channel to 255 (opaque)
             total_tuples += 1
 
         # Save the image to a PNG file
-        image_file_name = f"{page_hue_number:02.1f}-{page_hue_name}.png"
+        image_file_name = f"{hue_page_number:02.1f}-{hue_page_name}.png"
         image_path = os.path.join(output_image_folder, image_file_name)
         image.save(image_path)
             

@@ -2,7 +2,7 @@ import pandas as pd
 from enum import Enum
 import numpy as np 
 import math
-from .constants import PAGE_HUE_NAMES
+from .constants import hue_page_nameS
 
 # used in the sort_orders dict for sort_by_columns
 class SortOrder(Enum):
@@ -13,8 +13,8 @@ class MunsellDataFrame:
     
     # column names and their dtypes
     _dtypes = {
-        'page_hue_number': 'int',
-        'page_hue_name': 'str',
+        'hue_page_number': 'int',
+        'hue_page_name': 'str',
         'value_row': 'int',
         'chroma_column': 'int',
         'color_key': 'str',
@@ -28,9 +28,9 @@ class MunsellDataFrame:
     # df = MunsellDataFrame() 
     # or using 
     # df = MunsellDataFrame([
-    #     {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': 'change', 'r': 255, 'g': 0, 'b': 0},
-    #     {'page_hue_number': 2, 'page_hue_name': '5.0R', 'value_row': 8, 'chroma_column': 3, 'color_key': 'change', 'r': 0, 'g': 255, 'b': 0},
-    #     {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': 'change', 'r': 0, 'g': 0, 'b': 255},
+    #     {'hue_page_number': 1, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': 'change', 'r': 255, 'g': 0, 'b': 0},
+    #     {'hue_page_number': 2, 'hue_page_name': '5.0R', 'value_row': 8, 'chroma_column': 3, 'color_key': 'change', 'r': 0, 'g': 255, 'b': 0},
+    #     {'hue_page_number': 3, 'hue_page_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': 'change', 'r': 0, 'g': 0, 'b': 255},
     # ]
     # returns None - so self has been altered
     def __init__(self, data=None, index=None, columns=None, dtype=None, copy=False):
@@ -140,12 +140,12 @@ class MunsellDataFrame:
     # sets the color_key column for all rows
     # returns None - so self has been updated
     def set_color_key(self) -> None:
-        self.df['color_key'] = self.df.apply(lambda row: f"{row['page_hue_number']:2d}-{row['value_row']:2d}-{row['chroma_column']:2d}", axis=1)
+        self.df['color_key'] = self.df.apply(lambda row: f"{row['hue_page_number']:2d}-{row['value_row']:2d}-{row['chroma_column']:2d}", axis=1)
     
     # return a single color_key string
     @classmethod
-    def format_color_key(cls, page_hue_number:int, value_row:int, chroma_column:int) -> str:
-        return f"{page_hue_number:02d}-{value_row:02d}-{chroma_column:02d}"
+    def format_color_key(cls, hue_page_number:int, value_row:int, chroma_column:int) -> str:
+        return f"{hue_page_number:02d}-{value_row:02d}-{chroma_column:02d}"
     
     # return a list of all (r,g,b) tuples in the dataframe
     def get_rgb_tuples(self):
@@ -186,10 +186,10 @@ class MunsellDataFrame:
     # returns None - so self has been altered
     def uniqueify_hue_value_chroma_pairs(self):
         # print(f"uniqueify_hue_value_chroma_pairs starting with shape {self.shape}")
-        for page_hue_name in PAGE_HUE_NAMES:
-            hue_page_rows_mdf = self.filter_by_columns({'page_hue_name': page_hue_name})
+        for hue_page_name in hue_page_nameS:
+            hue_page_rows_mdf = self.filter_by_columns({'hue_page_name': hue_page_name})
             if hue_page_rows_mdf.shape[0] > 0:
-                unique_hue_page_rows_mdf = self.uniquify_hue_page_rows_mdf(page_hue_name, hue_page_rows_mdf)
+                unique_hue_page_rows_mdf = self.uniquify_hue_page_rows_mdf(hue_page_name, hue_page_rows_mdf)
 
                 scols = str(self.df.columns)
                 ucols = str(unique_hue_page_rows_mdf.df.columns)
@@ -199,7 +199,7 @@ class MunsellDataFrame:
                 if unique_hue_page_rows_mdf.shape[0] != hue_page_rows_mdf.shape[0]:
 
                     # remove the original hue_page_rows ... 
-                    self.remove_by_columns({'page_hue_name': page_hue_name})
+                    self.remove_by_columns({'hue_page_name': hue_page_name})
                     
                     # ... and append the unique rows using vertical concat 
                     new_df = pd.concat([self.df, unique_hue_page_rows_mdf.df], axis=0)
@@ -211,7 +211,7 @@ class MunsellDataFrame:
     # this classmethod returns the unique pairs and their average r,g,b values
     # found in the given hue_page_rows_mdf that have the same values and chroma.
     @classmethod
-    def uniquify_hue_page_rows_mdf(cls, page_hue_name:str, hue_page_rows_mdf):
+    def uniquify_hue_page_rows_mdf(cls, hue_page_name:str, hue_page_rows_mdf):
         unique_hue_page_rows_mdf = MunsellDataFrame()
         num_pairs = 0
         pair_cnts = {}
@@ -220,9 +220,9 @@ class MunsellDataFrame:
         pair_b_sum = {}
         num_pairs = 0
         list_of_tuples = hue_page_rows_mdf.to_list_of_tuples()
-        #['page_hue_number', 'page_hue_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
-        for page_hue_number, _, value_row, chroma_column, _, r, g, b in list_of_tuples:
-            tuple = (page_hue_number, value_row, chroma_column, r, g, b)
+        #['hue_page_number', 'hue_page_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
+        for hue_page_number, _, value_row, chroma_column, _, r, g, b in list_of_tuples:
+            tuple = (hue_page_number, value_row, chroma_column, r, g, b)
             pair = MunsellDataFrame.format_pair(value_row, chroma_column)
 
             if pair not in pair_cnts:
@@ -245,12 +245,12 @@ class MunsellDataFrame:
             g = math.floor(1.0 * pair_g_sum[unique_pair] / cnt)
             b = math.floor(1.0 * pair_b_sum[unique_pair] / cnt)
             value_row, chroma_column = MunsellDataFrame.parse_pair(unique_pair)
-            color_key = MunsellDataFrame.format_color_key(page_hue_number, value_row, chroma_column)
+            color_key = MunsellDataFrame.format_color_key(hue_page_number, value_row, chroma_column)
             
-            #['page_hue_number', 'page_hue_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
+            #['hue_page_number', 'hue_page_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
             unique_hue_page_row_dict = {
-                "page_hue_number":page_hue_number, 
-                "page_hue_name":page_hue_name, 
+                "hue_page_number":hue_page_number, 
+                "hue_page_name":hue_page_name, 
                 "value_row":value_row, 
                 "chroma_column":chroma_column, 
                 "color_key": color_key,  
@@ -272,7 +272,7 @@ class MunsellDataFrame:
    
     def groupby_color_key(self):
         # all MunsellDataFrame coluamns
-        #['page_hue_number', 'page_hue_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
+        #['hue_page_number', 'hue_page_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
         
         # using color_key as the index to group all r,g,b values for all rows with that index
         reduced_mdf = self.get_color_key_reduced()
@@ -295,23 +295,23 @@ class MunsellDataFrame:
     def get_color_key_expanded(self):
         df_copy = self.df.copy(deep=True)
 
-        df_copy[['page_hue_number', 'value_row', 'chroma_column']] = df_copy['color_key'].str.split('-', expand=True).astype(int)
-        mapping = {i+1: name for i, name in enumerate(PAGE_HUE_NAMES)}
-        df_copy['page_hue_name'] = df_copy['page_hue_number'].map(mapping)
+        df_copy[['hue_page_number', 'value_row', 'chroma_column']] = df_copy['color_key'].str.split('-', expand=True).astype(int)
+        mapping = {i+1: name for i, name in enumerate(hue_page_nameS)}
+        df_copy['hue_page_name'] = df_copy['hue_page_number'].map(mapping)
         
         # reorder to match the original column order
-        df_copy = df_copy[['page_hue_number', 'page_hue_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']]
+        df_copy = df_copy[['hue_page_number', 'hue_page_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']]
         
         return MunsellDataFrame(df_copy)
 
 
     @classmethod
-    def get_page_hue_name_from_page_hue_number(cls, page_hue_number):
-        return PAGE_HUE_NAMES[page_hue_number - 1]
+    def get_hue_page_name_from_hue_page_number(cls, hue_page_number):
+        return hue_page_nameS[hue_page_number - 1]
     
     
     # @classmethod
-    # def get_page_hue_number_from_color_key(cls, color_key):
+    # def get_hue_page_number_from_color_key(cls, color_key):
     #     parts = color_key.split("-")
     #     return int(parts[0])
     

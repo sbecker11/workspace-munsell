@@ -7,17 +7,17 @@ class TestMunsellDataFrame(unittest.TestCase):
     
     def setUp(self):
         self.data = [
-            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': 'change', 'r': 255, 'g': 0, 'b': 0},
-            {'page_hue_number': 2, 'page_hue_name': '5.0R', 'value_row': 8, 'chroma_column': 3, 'color_key': 'change', 'r': 0, 'g': 255, 'b': 0},
-            {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': 'change', 'r': 0, 'g': 0, 'b': 255},
-            {'page_hue_number': 3, 'page_hue_name': '10.0R', 'value_row': 6, 'chroma_column': 8, 'color_key': 'change', 'r': 255, 'g': 0, 'b': 255}
+            {'hue_page_number': 1, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': 'change', 'r': 255, 'g': 0, 'b': 0},
+            {'hue_page_number': 2, 'hue_page_name': '5.0R', 'value_row': 8, 'chroma_column': 3, 'color_key': 'change', 'r': 0, 'g': 255, 'b': 0},
+            {'hue_page_number': 3, 'hue_page_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': 'change', 'r': 0, 'g': 0, 'b': 255},
+            {'hue_page_number': 3, 'hue_page_name': '10.0R', 'value_row': 6, 'chroma_column': 8, 'color_key': 'change', 'r': 255, 'g': 0, 'b': 255}
         ]
         self.df = pd.DataFrame(self.data)
         self.munsell_df = MunsellDataFrame(data=self.df)
         
     def test_filter_by_columns(self):
         filters = {
-            'page_hue_name': '10.0R',
+            'hue_page_name': '10.0R',
             'value_row': 6
         }
         filtered_df = self.munsell_df.filter_by_columns(filters)
@@ -47,10 +47,10 @@ class TestMunsellDataFrame(unittest.TestCase):
     
     def test_groupby_color_key(self):
         input_mdf = MunsellDataFrame([
-            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 255, 'g': 0, 'b': 0},
-            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 0, 'g': 255, 'b': 0},
-            {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 0, 'g': 0, 'b': 255},
-            {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 255, 'g': 0, 'b': 255}
+            {'hue_page_number': 1, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 255, 'g': 0, 'b': 0},
+            {'hue_page_number': 1, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 0, 'g': 255, 'b': 0},
+            {'hue_page_number': 3, 'hue_page_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 0, 'g': 0, 'b': 255},
+            {'hue_page_number': 3, 'hue_page_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 255, 'g': 0, 'b': 255}
         ])
         
         expected_mdf = MunsellDataFrame([
@@ -64,10 +64,10 @@ class TestMunsellDataFrame(unittest.TestCase):
   
     def test_get_color_key_reduced_expanded(self):
         input_mdf = MunsellDataFrame([
-            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 255, 'g': 0, 'b': 0},
-            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 0, 'g': 255, 'b': 0},
-            {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 0, 'g': 0, 'b': 255},
-            {'page_hue_number': 3, 'page_hue_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 255, 'g': 0, 'b': 255}
+            {'hue_page_number': 1, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 255, 'g': 0, 'b': 0},
+            {'hue_page_number': 1, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': '01-09-05', 'r': 0, 'g': 255, 'b': 0},
+            {'hue_page_number': 3, 'hue_page_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 0, 'g': 0, 'b': 255},
+            {'hue_page_number': 3, 'hue_page_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': '03-06-07', 'r': 255, 'g': 0, 'b': 255}
         ])
         reduced_expected_mdf = MunsellDataFrame([
             {'color_key': '01-09-05', 'r': 255, 'g': 0, 'b': 0},
@@ -86,14 +86,14 @@ class TestMunsellDataFrame(unittest.TestCase):
     def test_append_rows_one_dict(self):
         mdf = MunsellDataFrame()
         self.assertEqual(mdf.shape, (0,8))
-        dict1 = {'page_hue_number': 3, 'page_hue_name': '10.0R', 'value_row': 6, 'chroma_column': 8, 'r': 255, 'g': 0, 'b': 255}
+        dict1 = {'hue_page_number': 3, 'hue_page_name': '10.0R', 'value_row': 6, 'chroma_column': 8, 'r': 255, 'g': 0, 'b': 255}
         mdf.append_rows([dict1])
         self.assertEqual(mdf.shape, (1,8))
         
     def test_append_rows_one_partial_dict(self):
         mdf = MunsellDataFrame()
         self.assertEqual(mdf.shape, (0,8))
-        dict1 = {'page_hue_number': 3}
+        dict1 = {'hue_page_number': 3}
         with self.assertRaises(pd.errors.IntCastingNaNError):
             mdf.append_rows([dict1])
 
@@ -125,7 +125,7 @@ class TestMunsellDataFrame(unittest.TestCase):
 
     def test_to_list_of_dicts_positive(self):
         input = [
-            {'page_hue_number': 1, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': 'change', 'r': 255, 'g': 0, 'b': 0}
+            {'hue_page_number': 1, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': 'change', 'r': 255, 'g': 0, 'b': 0}
         ]
         df = MunsellDataFrame(data=input)
         result = df.to_list_of_dicts()
@@ -168,15 +168,15 @@ class TestMunsellDataFrame(unittest.TestCase):
     def test_uniquify_hue_page_rows(self):
         dontcare_int = 0
         dontcare_str = "dontcare"
-        page_hue_name = '2.5R'
+        hue_page_name = '2.5R'
         value_row = 9
         chroma_column = 2
         hue_page_rows_as_dicts = [
-            {'page_hue_number': dontcare_int, 'page_hue_name': page_hue_name, 'value_row': value_row, 'chroma_column': chroma_column, 'color_key': dontcare_str, 'r': 255, 'g': 0, 'b': 0},
-            {'page_hue_number': dontcare_int, 'page_hue_name': page_hue_name, 'value_row': value_row, 'chroma_column': chroma_column, 'color_key': dontcare_str, 'r': 0, 'g': 255, 'b': 0},
-            {'page_hue_number': dontcare_int, 'page_hue_name': page_hue_name, 'value_row': value_row, 'chroma_column': chroma_column, 'color_key': dontcare_str, 'r': 0, 'g': 0, 'b': 255},
+            {'hue_page_number': dontcare_int, 'hue_page_name': hue_page_name, 'value_row': value_row, 'chroma_column': chroma_column, 'color_key': dontcare_str, 'r': 255, 'g': 0, 'b': 0},
+            {'hue_page_number': dontcare_int, 'hue_page_name': hue_page_name, 'value_row': value_row, 'chroma_column': chroma_column, 'color_key': dontcare_str, 'r': 0, 'g': 255, 'b': 0},
+            {'hue_page_number': dontcare_int, 'hue_page_name': hue_page_name, 'value_row': value_row, 'chroma_column': chroma_column, 'color_key': dontcare_str, 'r': 0, 'g': 0, 'b': 255},
         ]
-        # hue_page_rows_mdf is the result of filtering the entire dataframe by page_hue_name and value_row
+        # hue_page_rows_mdf is the result of filtering the entire dataframe by hue_page_name and value_row
         hue_page_rows_mdf = MunsellDataFrame(hue_page_rows_as_dicts)
         
         # assert the rgb data of hue_page_rows_mdf
@@ -184,7 +184,7 @@ class TestMunsellDataFrame(unittest.TestCase):
         self.assertEqual(len(rgb_tuples_before), 3)
         
         # run uniquify on the given params
-        unique_hue_page_rows_mdf = MunsellDataFrame.uniquify_hue_page_rows_mdf(page_hue_name, hue_page_rows_mdf)
+        unique_hue_page_rows_mdf = MunsellDataFrame.uniquify_hue_page_rows_mdf(hue_page_name, hue_page_rows_mdf)
         
         # assert the shape of the rgb data of the result
         rgb_tuples_after = unique_hue_page_rows_mdf.get_rgb_tuples()
@@ -198,9 +198,9 @@ class TestMunsellDataFrame(unittest.TestCase):
         dontcare_int = 0
         dontcare_str = "dontcare"
         data = [
-            {'page_hue_number': dontcare_int, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': dontcare_str, 'r': 255, 'g': 0, 'b': 0},
-            {'page_hue_number': dontcare_int, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': dontcare_str, 'r': 0, 'g': 255, 'b': 0},
-            {'page_hue_number': dontcare_int, 'page_hue_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': dontcare_str, 'r': 0, 'g': 0, 'b': 255},
+            {'hue_page_number': dontcare_int, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': dontcare_str, 'r': 255, 'g': 0, 'b': 0},
+            {'hue_page_number': dontcare_int, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': dontcare_str, 'r': 0, 'g': 255, 'b': 0},
+            {'hue_page_number': dontcare_int, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': dontcare_str, 'r': 0, 'g': 0, 'b': 255},
         ]
         mdf = MunsellDataFrame(data)
         
@@ -231,9 +231,9 @@ class TestMunsellDataFrame(unittest.TestCase):
         mdf = MunsellDataFrame(self.data)
         self.assertEqual(mdf.max_column('chroma_column'), 8)
         
-    def test_get_page_hue_name_from_page_hue_number(self):
-        for i in range(len(PAGE_HUE_NAMES)):
-            self.assertEqual(MunsellDataFrame.get_page_hue_name_from_page_hue_number(i+1), PAGE_HUE_NAMES[i])
+    def test_get_hue_page_name_from_hue_page_number(self):
+        for i in range(len(hue_page_nameS)):
+            self.assertEqual(MunsellDataFrame.get_hue_page_name_from_hue_page_number(i+1), hue_page_nameS[i])
     
 if __name__ == '__main__':
     unittest.main()

@@ -49,8 +49,8 @@ def process_long_excel_file(excel_file_long_dir):
     # df.columnns: Index(['Table Number', 'Hue Name', 'V', 'C', 'R', 'G', 'B'], dtype='object')
     
     df = df.rename(columns={
-        'Table Number': 'page_hue_number',
-        'Hue Name': 'page_hue_name',
+        'Table Number': 'hue_page_number',
+        'Hue Name': 'hue_page_name',
         'V': 'value_row',
         'C': 'chroma_column',
         'R': 'r',
