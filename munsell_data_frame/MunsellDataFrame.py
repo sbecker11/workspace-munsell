@@ -2,7 +2,7 @@ import pandas as pd
 from enum import Enum
 import numpy as np 
 import math
-from .constants import hue_page_nameS
+from .constants import HUE_PAGE_NAMES
 
 # used in the sort_orders dict for sort_by_columns
 class SortOrder(Enum):
@@ -13,14 +13,14 @@ class MunsellDataFrame:
     
     # column names and their dtypes
     _dtypes = {
-        'hue_page_number': 'int',
+        'hue_page_number': 'UInt8',
         'hue_page_name': 'str',
-        'value_row': 'int',
-        'chroma_column': 'int',
+        'value_row': 'UInt8',
+        'chroma_column': 'UInt8',
         'color_key': 'str',
-        'r': 'int',
-        'g': 'int',
-        'b': 'int',
+        'r': 'UInt8',
+        'g': 'UInt8',
+        'b': 'UInt8',
     }
 
     # called when creating an instance of a MunsellDataFrame 
@@ -28,11 +28,11 @@ class MunsellDataFrame:
     # df = MunsellDataFrame() 
     # or using 
     # df = MunsellDataFrame([
-    #     {'hue_page_number': 1, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': 'change', 'r': 255, 'g': 0, 'b': 0},
-    #     {'hue_page_number': 2, 'hue_page_name': '5.0R', 'value_row': 8, 'chroma_column': 3, 'color_key': 'change', 'r': 0, 'g': 255, 'b': 0},
-    #     {'hue_page_number': 3, 'hue_page_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': 'change', 'r': 0, 'g': 0, 'b': 255},
+    #     {'hue_page_number': 0, 'hue_page_name': '2.5R', 'value_row': 9, 'chroma_column': 5, 'color_key': 'change', 'r': 255, 'g': 0, 'b': 0},
+    #     {'hue_page_number': 1, 'hue_page_name': '5.0R', 'value_row': 8, 'chroma_column': 3, 'color_key': 'change', 'r': 0, 'g': 255, 'b': 0},
+    #     {'hue_page_number': 2, 'hue_page_name': '7.5R', 'value_row': 6, 'chroma_column': 7, 'color_key': 'change', 'r': 0, 'g': 0, 'b': 255},
     # ]
-    # returns None - so self has been altered
+    # returns None - since self has been altered
     def __init__(self, data=None, index=None, columns=None, dtype=None, copy=False):
         if data is None:
             data = pd.DataFrame(columns=self._dtypes.keys())
@@ -42,7 +42,7 @@ class MunsellDataFrame:
         self._set_dtypes()
 
     # used to set dataframe columns in __init__
-    # returns None - so self has been altered
+    # returns None - since self has been altered
     def _set_dtypes(self): # pragma: no cover
         for col, dtype in self._dtypes.items():
             if col in self.df.columns:
@@ -50,12 +50,19 @@ class MunsellDataFrame:
         
     # append rows to the dataframe where each row
     # is a MunsellDataFrame-columned dict
-    # returns None - so self has been altered
+    # returns None - since self has been altered.
+    #
+    # Note that any row with an empty dict will 
+    # still be added as a row with empty column values. 
+    # for example:
+    #     hue_page_number hue_page_name  value_row  chroma_column color_key     r     g     b
+    #  0   <NA>           nan            <NA>        <NA>         nan         <NA>  <NA>  <NA>
     def append_rows(self, rows):
         if self.df.empty:
             self.__init__(columns=self._dtypes.keys())
         for row in rows:
-            self.df.loc[len(self.df)] = row
+            if row: # skip empty rows
+                self.df.loc[len(self.df)] = row
         self._set_dtypes()
     
     # handle all to_dict options
@@ -98,10 +105,11 @@ class MunsellDataFrame:
 
     # return a list of unique values for the given column
     def unique_values(self, column):
-        return self.df[column].unique()
+        unique_vals = self.df[column].unique()
+        return [int(val) if isinstance(val, float) and val.is_integer() else val.item() if isinstance(val, np.generic) else val for val in unique_vals]
 
     # remove the dataframe's index column
-    # return None - so self has been altered
+    # return None - since self has been altered
     def reset_index(self):
         self.df = self.df.reset_index(drop=True)
 
@@ -118,15 +126,37 @@ class MunsellDataFrame:
             mask = mask & (self.df[col] == val)
         return MunsellDataFrame(self.df[mask])
     
+    # Drop columns by their names.
+    # Parameters:
+    # - columns (str or list of str): Column name or names of the columns to drop.
+    # return None, since self has been altered
+    def drop_columns(self, columns, reset_index=True):
+        self.df = self.df.drop(columns=columns, axis=1)
+        if reset_index:
+            self.df.reset_index(drop=True, inplace=True)
+
+    # Drop rows by their indices
+    # Parameters:
+    # - indices (int or list of ints): Index or indices of the rows to drop.
+    # return None, since self has been altered
+    def drop_rows(self, indices, reset_index=True):
+        self.df = self.df.drop(indices)
+        if reset_index:
+            self.df.reset_index(drop=True, inplace=True)
+
+
     # remove all rows in the dataframe that match all of the given column filters., for example:
     # filters = {
     #     "value_row": 7,
     #     "chroma_column": 2
     # }
-    # return None - so self has been altered
-    def remove_by_columns(self, filters):
+    # if reset_index is False then the resulting df may have gaps in its index
+    # return None - since self has been altered
+    def remove_by_columns(self, filters, reset_index=True):
         for col, val in filters.items():
             self.df = self.df[self.df[col] != val]
+        if reset_index:
+            self.df.reset_index(drop=True, inplace=True)
 
     # sort the dataframe by multiple columns given a sort_orders dictionary, for example:
     # sort_orders = {
@@ -138,7 +168,7 @@ class MunsellDataFrame:
         return MunsellDataFrame(self.df.sort_values(by=list(sort_orders.keys()), ascending=[sort_order == SortOrder.ASC for sort_order in sort_orders.values()]))
 
     # sets the color_key column for all rows
-    # returns None - so self has been updated
+    # returns None - since self has been altered
     def set_color_key(self) -> None:
         self.df['color_key'] = self.df.apply(lambda row: f"{row['hue_page_number']:2d}-{row['value_row']:2d}-{row['chroma_column']:2d}", axis=1)
     
@@ -178,95 +208,18 @@ class MunsellDataFrame:
 
     @classmethod
     def parse_pair(cls, pair):
-        value_row, chroma_column = map(int, pair.split("-"))
+        parts = pair.split("-")
+        if len(parts) != 2: # pragma: no coverage
+            raise ValueError(f"Invalid input: {pair}")
+        value_row = None if parts[0] == "None" else int(parts[0])
+        chroma_column = None if parts[1] == "None" else int(parts[1])
         return value_row, chroma_column
-
-    # replace each page_hue with rows of unique row/col pairs.
-    # this should always be called after creating a dataset from a raw source
-    # returns None - so self has been altered
-    def uniqueify_hue_value_chroma_pairs(self):
-        # print(f"uniqueify_hue_value_chroma_pairs starting with shape {self.shape}")
-        for hue_page_name in hue_page_nameS:
-            hue_page_rows_mdf = self.filter_by_columns({'hue_page_name': hue_page_name})
-            if hue_page_rows_mdf.shape[0] > 0:
-                unique_hue_page_rows_mdf = self.uniquify_hue_page_rows_mdf(hue_page_name, hue_page_rows_mdf)
-
-                scols = str(self.df.columns)
-                ucols = str(unique_hue_page_rows_mdf.df.columns)
-                assert ucols == scols, "num columns don't match"
-
-                # if the number of unique rows differs from the original rows ...
-                if unique_hue_page_rows_mdf.shape[0] != hue_page_rows_mdf.shape[0]:
-
-                    # remove the original hue_page_rows ... 
-                    self.remove_by_columns({'hue_page_name': hue_page_name})
-                    
-                    # ... and append the unique rows using vertical concat 
-                    new_df = pd.concat([self.df, unique_hue_page_rows_mdf.df], axis=0)
-                    self.df = new_df
-
-        # print(f"uniqueify_hue_value_chroma_pairs done with shape {self.shape}")
-    
-    # there are multiple samples for each value-chroma pair in a hue_page.
-    # this classmethod returns the unique pairs and their average r,g,b values
-    # found in the given hue_page_rows_mdf that have the same values and chroma.
-    @classmethod
-    def uniquify_hue_page_rows_mdf(cls, hue_page_name:str, hue_page_rows_mdf):
-        unique_hue_page_rows_mdf = MunsellDataFrame()
-        num_pairs = 0
-        pair_cnts = {}
-        pair_r_sum = {}
-        pair_g_sum = {}
-        pair_b_sum = {}
-        num_pairs = 0
-        list_of_tuples = hue_page_rows_mdf.to_list_of_tuples()
-        #['hue_page_number', 'hue_page_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
-        for hue_page_number, _, value_row, chroma_column, _, r, g, b in list_of_tuples:
-            tuple = (hue_page_number, value_row, chroma_column, r, g, b)
-            pair = MunsellDataFrame.format_pair(value_row, chroma_column)
-
-            if pair not in pair_cnts:
-                pair_cnts[pair] = 0
-                pair_r_sum[pair] = 0
-                pair_g_sum[pair] = 0
-                pair_b_sum[pair] = 0
-
-            pair_cnts[pair] += 1
-            pair_r_sum[pair] += r
-            pair_g_sum[pair] += g
-            pair_b_sum[pair] += b
-            num_pairs += 1
-        
-        # get mean r,g,b for each unique pair
-        for unique_pair in pair_cnts:
-            cnt = 1.0 * pair_cnts[unique_pair]
-            # compute average r,g,b
-            r = math.floor(1.0 * pair_r_sum[unique_pair] / cnt)
-            g = math.floor(1.0 * pair_g_sum[unique_pair] / cnt)
-            b = math.floor(1.0 * pair_b_sum[unique_pair] / cnt)
-            value_row, chroma_column = MunsellDataFrame.parse_pair(unique_pair)
-            color_key = MunsellDataFrame.format_color_key(hue_page_number, value_row, chroma_column)
-            
-            #['hue_page_number', 'hue_page_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']
-            unique_hue_page_row_dict = {
-                "hue_page_number":hue_page_number, 
-                "hue_page_name":hue_page_name, 
-                "value_row":value_row, 
-                "chroma_column":chroma_column, 
-                "color_key": color_key,  
-                "r":r, "g":g, "b": b }
-            unique_hue_page_row_mdf = MunsellDataFrame([unique_hue_page_row_dict])
-            
-            # vertical concat each unique row 
-            unique_hue_page_rows_mdf.df = pd.concat([unique_hue_page_rows_mdf.df, unique_hue_page_row_mdf.df], axis=0)
-            
-        return unique_hue_page_rows_mdf
     
     def equals(self, other_mdf, verbose:bool=False) -> bool:
         same = self.df.equals(other_mdf.df)
-        if verbose:
+        if verbose: # pragma: no coverage
             print(f"self.df:\n{self.df}")
-            print("equals" if same else "does not equal")
+            print("equals" if same else "does not equal") 
             print(f"other.df:\n{other_mdf.df}")
         return same
    
@@ -296,7 +249,7 @@ class MunsellDataFrame:
         df_copy = self.df.copy(deep=True)
 
         df_copy[['hue_page_number', 'value_row', 'chroma_column']] = df_copy['color_key'].str.split('-', expand=True).astype(int)
-        mapping = {i+1: name for i, name in enumerate(hue_page_nameS)}
+        mapping = {i: name for i, name in enumerate(HUE_PAGE_NAMES)}
         df_copy['hue_page_name'] = df_copy['hue_page_number'].map(mapping)
         
         # reorder to match the original column order
@@ -307,7 +260,7 @@ class MunsellDataFrame:
 
     @classmethod
     def get_hue_page_name_from_hue_page_number(cls, hue_page_number):
-        return hue_page_nameS[hue_page_number - 1]
+        return HUE_PAGE_NAMES[hue_page_number]
     
     
     # @classmethod

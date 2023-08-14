@@ -47,7 +47,7 @@ def process_excel_file_macro(excel_file_macro_dir):
     }
     sorted_df = df.sort_values(by=list(sort_orders.keys()), ascending=[sort_order == SortOrder.ASC for sort_order in sort_orders.values()])
     
-    # Assign each unique 'hue_page_name' an integer from 1 to number of unique hue_page_names (40)
+    # Assign each unique 'hue_page_name' an integer from 1 to number of unique HUE_PAGE_NAMES (40)
     df['hue_page_number'] = df.groupby('hue_page_name').ngroup() + 1
 
     # make sure the incoming df is compatible with MunsellDataFrame

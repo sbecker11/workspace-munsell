@@ -3,7 +3,7 @@ import pandas as pd
 from PIL import Image, ImageDraw
 import argparse
 from munsell_data_frame import MunsellDataFrame
-from munsell_data_frame.constants import hue_page_nameS
+from munsell_data_frame.constants import HUE_PAGE_NAMES
 
 chip_size = 75
 chip_gap = 10
@@ -52,7 +52,7 @@ def main(output_image_folder, parquet_file):
     page_hue_image_height = max_rows * (chip_size + chip_gap) 
     
     total_tuples = 0
-    for hue_page_name in hue_page_nameS:
+    for hue_page_name in HUE_PAGE_NAMES:
         hue_page_number = None
         
         # create an image fore each hue page

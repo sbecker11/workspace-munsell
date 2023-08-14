@@ -7,6 +7,12 @@
             "command": "coverage report -m && coverage html -d tests/htmlcov",
             "presentation": {
                 "reveal": "always"
+            },
+            "options": {
+                "env": {
+                    "COVERAGE_FILE": "tests/.coverage",
+                    "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"
+                }
             }
         },
         {
