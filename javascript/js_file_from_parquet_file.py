@@ -10,6 +10,8 @@ def main(js_file, parquet_file):
     # parquet_file input
     parquet_filename = parquet_file
     munsell_df = MunsellDataFrame.from_parquet(parquet_filename)
+    assert munsell_df.shape[1] == 4, f"munsell_df has {munsell_df.shape[1]} columns not 4"
+        
     munsell_records = munsell_df.to_dict('records')
 
     # js_file output

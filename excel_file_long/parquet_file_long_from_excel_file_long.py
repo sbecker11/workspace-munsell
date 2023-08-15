@@ -45,9 +45,9 @@ def process_long_excel_file(excel_file_long_dir):
     # Choose order of columns to keep
     df = final_df[["Table Number","Hue Name", "V", "C", "R", "G", "B"]]
     
-    print("df.columns:", df.columns)
-    # df.columnns: Index(['Table Number', 'Hue Name', 'V', 'C', 'R', 'G', 'B'], dtype='object')
-    
+    print(f"pre munsell columns:{df.columns}")
+    print(f"pre-munsell shape:{df.shape}")
+
     df = df.rename(columns={
         'Table Number': 'hue_page_number',
         'Hue Name': 'hue_page_name',
@@ -57,12 +57,16 @@ def process_long_excel_file(excel_file_long_dir):
         'G': 'g',
         'B': 'b'
     })
-    print("pre-munsell:", df.columns)
+    
+    # hue_page = Table Number - 1
+    df['hue_page_number'] = df['hue_page_number'] - 1
 
     munsell_df = MunsellDataFrame(df)
     munsell_df.set_color_key()
-
-    print("munsell_df.columes:", munsell_df.columns)
+    munsell_df = munsell_df.groupby_color_key()
+    
+    print(f"munsell_df.columns: {munsell_df.columns}")
+    print(f"munsell_df.shape: {munsell_df.shape}")
     
     munsell_df.to_parquet(parquet_file_long)
     

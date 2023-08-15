@@ -170,7 +170,7 @@ class MunsellDataFrame:
     # sets the color_key column for all rows
     # returns None - since self has been altered
     def set_color_key(self) -> None:
-        self.df['color_key'] = self.df.apply(lambda row: f"{row['hue_page_number']:2d}-{row['value_row']:2d}-{row['chroma_column']:2d}", axis=1)
+        self.df['color_key'] = self.df.apply(lambda row: f"{row['hue_page_number']:02d}-{row['value_row']:02d}-{row['chroma_column']:02d}", axis=1)
     
     # return a single color_key string
     @classmethod
@@ -223,6 +223,7 @@ class MunsellDataFrame:
             print(f"other.df:\n{other_mdf.df}")
         return same
    
+    # returns new MunsellDataFrame with an average r,b,g color per each unique color_key
     def groupby_color_key(self):
         # all MunsellDataFrame coluamns
         #['hue_page_number', 'hue_page_name', 'value_row', 'chroma_column', 'color_key', 'r', 'g', 'b']

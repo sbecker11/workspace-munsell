@@ -1,7 +1,8 @@
 
 import pandas as pd
 import numpy as np
-from munsell_data_frame import MunsellDataFrame, SortOrder
+from munsell_data_frame.MunsellDataFrame import MunsellDataFrame, SortOrder
+from munsell_data_frame.constants import HUE_PAGE_NAMES
 import os
 import argparse
 
@@ -29,34 +30,37 @@ def process_excel_file_macro(excel_file_macro_dir):
     df[['r', 'g', 'b']] = df['Chip_RGB'].str.split(',', expand=True).astype(int)
     
     # drop unused columns
-    df = df.drop(columns=['Chip_RGB','Chip_Number'])
+    df = df.drop(columns=['Chip_RGB','Chip_Number', 'Chip_Color_Key'])
         
     # rename and reorder df columns           
-    df = df.rename(columns={
+    df.rename(columns={
         'Page_HueName': 'hue_page_name',
         'Value_Row': 'value_row',
         'Chroma_Column': 'chroma_column',
-        'Chip_Color_Key': 'color_key'
-    })
-    
+        'R': 'r',
+        'G': 'g',
+        'B': 'b'
+    }, inplace=True)
+        
+    # Create a mapping dictionary to 
+    hue_page_name_to_number = {name: idx for idx, name in enumerate(HUE_PAGE_NAMES)}
 
-    # To compute hue_page_number 1 to 40 from hue_page_name
-    # Sort the DataFrame by 'hue_page_name'
-    sort_orders = {
-        'hue_page_name': SortOrder.ASC
-    }
-    sorted_df = df.sort_values(by=list(sort_orders.keys()), ascending=[sort_order == SortOrder.ASC for sort_order in sort_orders.values()])
-    
-    # Assign each unique 'hue_page_name' an integer from 1 to number of unique HUE_PAGE_NAMES (40)
-    df['hue_page_number'] = df.groupby('hue_page_name').ngroup() + 1
+    # Map hue_page_name to its corresponding hue_page_number
+    df['hue_page_number'] = df['hue_page_name'].map(hue_page_name_to_number)
 
     # make sure the incoming df is compatible with MunsellDataFrame
-    empty_mdf = MunsellDataFrame()
-    
-    assert (len(df.columns) == len(empty_mdf.columns)), "DataFrames must have same number of columns"
-    assert (set(df.columns) == set(empty_mdf.columns)), "DataFrames have different columns"
-
     munsell_df = MunsellDataFrame(df)
+    
+    # set the color_key column
+    munsell_df.set_color_key()
+    
+    # keep these reordered columns
+    munsell_df.df = munsell_df.df[["color_key","r","g","b"]]
+    print(f"munsell_df shape before groupby_color_key: {munsell_df.shape}")
+    
+    munsell_df = munsell_df.groupby_color_key()
+    print(f"munsell_df shape after groupby_color_key: {munsell_df.shape}")
+
     
     munsell_df.to_parquet(parquet_file_macro)
     

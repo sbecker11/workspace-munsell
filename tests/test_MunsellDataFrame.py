@@ -29,16 +29,33 @@ class TestMunsellDataFrame(unittest.TestCase): # pragma: no cover
         self.assertEqual(filtered_df.shape[0], 1, "wrong number of rows")
         # print('done')
         
-    def test_set_color_key(self):
+    def test_filter_by_invalid_column_value(self):
         self.munsell_df.set_color_key()
         filters = {
             'color_key': 'change'
         }
         filtered_df = self.munsell_df.filter_by_columns(filters)
-        # print("\nfiltered:\n", filtered_df)
-        # print("\nempty?:\n", filtered_df.empty)
         self.assertEqual(filtered_df.empty, True, "expected empty")
         self.assertEqual(filtered_df.shape[0], 0, "expected zero rows")
+
+    def test_set_color_key(self):
+        # Create a sample dataframe
+        data = {
+            'hue_page_number': [1, 10, 99, 3],
+            'value_row': [2, 20, 5, 0],
+            'chroma_column': [3, 30, 8, 1]
+        }
+        df = pd.DataFrame(data)
+        mdf = MunsellDataFrame(df)
+
+        # Call the function
+        mdf.set_color_key()
+
+        # Check the results
+        expected_values = ['01-02-03', '10-20-30', '99-05-08', '03-00-01']
+        for idx, expected in enumerate(expected_values):
+            actual = mdf.df.loc[idx, 'color_key']
+            self.assertEqual( actual, expected, f"Expected {expected}, but got {actual}")
 
     def test_sort_by_columns(self):
         sort_orders = {
