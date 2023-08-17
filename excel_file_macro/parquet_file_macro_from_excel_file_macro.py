@@ -9,7 +9,7 @@ import argparse
 # reads an Excel spreadsheet with macros and writes a 
 def process_excel_file_macro(excel_file_macro_dir):
     # output
-    parquet_file_macro = excel_file_macro_dir + "parqet_file_macro.parquet"
+    parquet_file_macro = excel_file_macro_dir + "parquet_file_macro.parquet"
 
     # input
     excel_file_macro = excel_file_macro_dir + "Munsell-to-RGB-Tables.xlsm"

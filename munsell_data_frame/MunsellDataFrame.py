@@ -170,6 +170,9 @@ class MunsellDataFrame:
     # sets the color_key column for all rows
     # returns None - since self has been altered
     def set_color_key(self) -> None:
+        if 'hue_page_number' not in self.df.columns and 'color_key' in self.df.columns:
+            print(f"color_key already set")
+            return
         self.df['color_key'] = self.df.apply(lambda row: f"{row['hue_page_number']:02d}-{row['value_row']:02d}-{row['chroma_column']:02d}", axis=1)
     
     # return a single color_key string
