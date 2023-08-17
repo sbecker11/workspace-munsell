@@ -10,7 +10,17 @@ def main(js_file, parquet_file):
     # parquet_file input
     parquet_filename = parquet_file
     munsell_df = MunsellDataFrame.from_parquet(parquet_filename)
-    assert munsell_df.shape[1] == 4, f"munsell_df has {munsell_df.shape[1]} columns not 4"
+    
+    if 'page_hue_name' in munsell_df.df.columns:
+        munsell_df.df.rename(columns={'page_hue_name':'hue_page_name'}, inplace=True)
+        assert 'page_hue_name' not in munsell_df.df.columns, "page_hue_name not renamed"
+
+    if 'page_hue_number' in munsell_df.df.columns:
+        munsell_df.df.rename(columns={'page_hue_number':'hue_page_number'}, inplace=True)
+        assert 'page_hue_number' not in munsell_df.df.columns, "page_hue_number not renamed"
+            
+    munsell_df.set_color_key()
+    munsell_df = munsell_df.groupby_color_key()
         
     munsell_records = munsell_df.to_dict('records')
 
