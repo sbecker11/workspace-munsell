@@ -166,14 +166,36 @@ class MunsellDataFrame:
     # returns a new MunsellDataFrame that contains the sorted rows
     def sort_by_columns(self, sort_orders):
         return MunsellDataFrame(self.df.sort_values(by=list(sort_orders.keys()), ascending=[sort_order == SortOrder.ASC for sort_order in sort_orders.values()]))
+    
+    # property return True if the dimension columns required for color_key coding exist
+    # note: does not check to see if dimension columns have values
+    @property
+    def is_color_key_encodeable(self):
+        if ('hue_page_number' in self.columns) and ('value_row' in self.columns) and ('chroma_column' in self.columns):       
+            return True
+        return False
+    
+    # property returns True if the 'color_key' columns is found
+    # note: does not check to see if the column has values
+    @property
+    def has_color_key(self):
+        return 'color_key' in self.columns
 
-    # sets the color_key column for all rows
+    # decode the 'color_key into 'hue_page_number', 'value_row', and 'chroma_column'
     # returns None - since self has been altered
+    def decode_color_key(self) -> None:
+        if self.has_color_key:
+            self.df[['hue_page_number', 'value_row', 'chroma_column']] = self.df['color_key'].str.split('-', expand=True).astype(int)
+        else:
+            print(f"'color_key' is undefined")
+    
+    # sets 'color_key' column from 'hue_page_number', 'value_row', and 'chroma_column' columns
+    # returns None since self may be altered
     def set_color_key(self) -> None:
-        if 'hue_page_number' not in self.df.columns and 'color_key' in self.df.columns:
-            print(f"color_key already set")
-            return
-        self.df['color_key'] = self.df.apply(lambda row: f"{row['hue_page_number']:02d}-{row['value_row']:02d}-{row['chroma_column']:02d}", axis=1)
+        if not self.is_color_key_encodeable:
+            print(f"'color_key' is not encodeable")
+        else:
+            self.df['color_key'] = self.df.apply(lambda row: f"{row['hue_page_number']:02d}-{row['value_row']:02d}-{row['chroma_column']:02d}", axis=1)
     
     # return a single color_key string
     @classmethod
