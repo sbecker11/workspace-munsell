@@ -67,8 +67,9 @@ def create_animated_gif(png_folder, gif_filename, duration=100, bg=-1, scale=100
 if __name__ == "__main__":
     # Check if required command-line arguments are provided
     if len(sys.argv) < 3:
-        print("Usage: python create_animated_gif.py <png_folder> <gif_filename> [--bg <0-255>] [--scale <percentage>]")
-        print("Example: python create_animated_gif.py HuePagesRendered animated.gif --bg 128 --scale 50")
+        print("Usage: python animate_hue_page_images.py <png_folder> <gif_filename> [--bg <0-255>] [--scale <percentage>]")
+        print("Example: python animate_hue_page_images.py excel_file_long/hue_page_images excel_file_long/hue_pages_animated.gif --bg 128 --scale 50")
+        print("Example: python animate_hue_page_images.py excel_file_macro/hue_page_images excel_file_macro/hue_pages_animated.gif --bg 128 --scale 50")
         sys.exit(1)
 
     # Get the command-line arguments

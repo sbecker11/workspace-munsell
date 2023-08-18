@@ -1,9 +1,6 @@
 {
     "version": "0.2.0",
     "configurations": [
-
-    
-
         {
             "name": "test_MunsellDataFrame",
             "type": "python",
@@ -97,8 +94,32 @@
             "args": ["--p", "excel_file_long/parquet_file_long.parquet"],
             "console": "integratedTerminal",
             "env": {"PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"}
+        },
+        {
+            "name": "animate-excel-file-long-hue-page-images",
+            "type": "python",
+            "request": "launch",
+            "program": "animate/animate_hue_page_images.py",
+            "args": [
+                "excel_file_long/hue_page_images", 
+                "excel_file_long/hue_pages_animated.gif",
+                "--bg", "32",
+                "--scale", "50"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "animate-excel-file-macro-hue-page-images",
+            "type": "python",
+            "request": "launch",
+            "program": "animate/animate_hue_page_images.py",
+            "args": [
+                "excel_file_macro/hue_page_images", 
+                "excel_file_macro/hue_pages_animated.gif",
+                "--bg", "32",
+                "--scale", "50"
+            ],
+            "console": "integratedTerminal"
         }
-
-
     ]
 }
