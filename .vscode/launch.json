@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+
     
 
         {
@@ -76,6 +77,15 @@
             "request": "launch",
             "program": "hue_pages/hue_page_images_from_parquet_file.py",
             "args": ["--o","excel_file_long/hue_page_images","--p", "excel_file_long/parquet_file_long.parquet"],
+            "console": "integratedTerminal",
+            "env": {"PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"}
+        },
+        {
+            "name": "histgrams_from_excel_file_macro",
+            "type": "python",
+            "request": "launch",
+            "program": "histogram/histograms_from_parquet_file.py",
+            "args": ["--p", "excel_file_macro/parquet_file_macro.parquet"],
             "console": "integratedTerminal",
             "env": {"PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"}
         },
