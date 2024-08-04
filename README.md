@@ -96,7 +96,7 @@ For this project, we need to extend the model by replacing the 3D color cubes wi
 
 This repo contains the `Munsell-to-RGB-Tables.xlsm` folder, which contains 40 png files, one for each HuePage. For example, this is `351-10.0RP.png`  
 
-<img src="./.keep/HuePagesScanned/351-10.0RP.png" width=50%/>  
+<img src="./.keep/HuePagesScanned/351-10.0RP.png" width=33%/>  
 
 
 Each filename has format:  
@@ -108,7 +108,7 @@ so `351-10.0RP.png` decodes to
 
 ## The HuePages defined in the Munsell-to-RGB-Tables as an animated gif  
 
-<img src="./excel_file_macro/movies/animated.gif" width="50%"/>  
+<img src="./excel_file_macro/movies/animated.gif" width="33%"/>  
 
 
 ## The 3D model and the GreyShaft 
@@ -148,25 +148,22 @@ Removed
 
 ## Check out the inspirational work of others  
 
-<a href="https://www.researchgate.net/profile/Caroline-Larboulette"><img src="https://www.researchgate.net/profile/Caroline-Larboulette/publication/220795296/figure/fig13/AS:668413223530499@1536373539330/3D-plot-of-the-Munsell-Color-Order-System_W640.jpg" width=33% height=33%><br/>from Caroline Larboulette</a>
+<a href="https://www.researchgate.net/publication/220795296_Celtic_Knots_Colorization_based_on_Color_Harmony_Principles"><img src="./images/3D-plot-of-the-Munsell-Color-Order-System_W640.jpg" width=33% height=33%><br/>3D plot of the Munsell Color Order System. Caroline Larboulette</a>
 
 
-<a href="https://www.youtube.com/watch?v=106qfBwZgM4"><img src="https://i.ytimg.com/vi/106qfBwZgM4/maxresdefault.jpg" width=33% height=33%><br/>Munsell Color Space - basic color theory
-Uploaded: Jun 2, 2020<a>
+<a href="https://www.youtube.com/watch?v=106qfBwZgM4"><img src="./images/maxresdefault.jpg" width=33% height=33%><br/>Munsell Color Space - basic color theory. 黄运南ngwoonlam<a>
 
-<a href="https://commons.wikimedia.org/w/index.php?curid=8401562"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Munsell_1943_color_solid_cylindrical_coordinates.png/800px-Munsell_1943_color_solid_cylindrical_coordinates.png?20200120011336" width=33% height=33%><br/>A representation of the Munsell Color Solid Cylindrical Coordinates.<br/>sRGB approximations of the 1943 Munsell color notations.<br/>By SharkD - Own work, CC BY-SA 3.0</a>
 
-<a href="https://www.researchgate.net/profile/Mojtaba-Navvab/publication/258926207/figure/fig4/AS:297021421441028@1447826833944/Munsell-a-and-CIELAB-b-color-solid_W640.jpg" width=33% height=33%><img src="https://www.researchgate.net/profile/Mojtaba-Navvab/publication/258926207/figure/fig4/AS:297021421441028@1447826833944/Munsell-a-and-CIELAB-b-color-solid_W640.jpg"></a><br/>
-<a href="https://www.researchgate.net/profile/Mojtaba-Navvab">Munsell (a.) and CIELAB (b.) color solid. From Mojtaba Navvab</a>
+<a href="https://www.researchgate.net/profile/Mojtaba-Navvab/publication/258926207/figure/fig4/AS:297021421441028@1447826833944/Munsell-a-and-CIELAB-b-color-solid_W640.jpg" width=33% height=33%><img src="./images/Munsell-a-and-CIELAB-b-color-solid_W640.jpg" width="33%"></a><br/>
+<a href="https://www.researchgate.net/profile/Mojtaba-Navvab">Munsell (a.) and CIELAB (b.) color solid. Mojtaba Navvab</a>
 
-<a href="https://www.researchgate.net/profile/Pierre-Boher"><img src="https://www.researchgate.net/profile/Pierre-Boher/publication/323656713/figure/fig2/AS:602216821964800@1520591087705/Color-volumes-of-Rec2020-reference-in-the-Yxy-space-top-left-Yuv-space-top-right_W640.jpg" width=33% height=33%><br/>Color volumes of Rec.2020 reference in the Yxy space (top left),<br/> Yu'v' space (top right), Lab space (bottom left) and in the ICtCp<br/>color space (bottom right). Pierre Boher</a> 
+<a href="https://www.researchgate.net/publication/323656713_Color_volumes_in_Lab_and_ICtCp_color_spaces_for_viewing_angle_color_characterization_of_QLED_and_OLED_HDRWCG_displays"><img src="images/Color-volumes-of-Rec2020-reference-in-the-Yxy-space-top-left-Yuv-space-top-right.png" width=33% height=33%><br/>Color volumes of Rec.2020 reference in the Yxy space (top left),<br/> Yu'v' space (top right), Lab space (bottom left) and in the ICtCp<br/>color space (bottom right). Pierre Boher</a> 
 
-<a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fhbfs.wordpress.com%2F2018%2F06%2F12%2Fmunsell-colorspace-colorspaces-ix%2F&psig=AOvVaw0TgZry3xAaarO93rYUAU1j&ust=1690674964514000&source=images&cd=vfe&opi=89978449&ved=0CBEQjhxqGAoTCKCZpJfNsoADFQAAAAAdAAAAABCgAQ"><img src="https://hbfs.files.wordpress.com/2018/05/munsell.gif" width=33% height=33%><br/>Munsell Colorspace (Colorspaces IX) | Harder, Better, Faster, Stronger</a>
+<a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fhbfs.wordpress.com%2F2018%2F06%2F12%2Fmunsell-colorspace-colorspaces-ix%2F&psig=AOvVaw0TgZry3xAaarO93rYUAU1j&ust=1690674964514000&source=images&cd=vfe&opi=89978449&ved=0CBEQjhxqGAoTCKCZpJfNsoADFQAAAAAdAAAAABCgAQ"><img src="images/steven-pigeon-munsell.gif" width=33% height=33%><br/>Munsell Colorspace (Colorspaces IX) | Harder, Better, Faster, Stronger. Steven Pigeon</a>
 
-<p><a hre="https://www.handprint.com/HP/WCL/color1.html"><img src="https://www.handprint.com/HP/WCL/IMG/conesps1.gif"><br/>light and the eye</a></p>
-<p><a href="https://www.handprint.com/HP/WCL/color2.html"><img src="https://www.handprint.com/HP/WCL/IMG/munzcs.gif"><br/>the geometry of color</a></p>
-<p><a href="https://www.handprint.com/HP/WCL/color3.html"><img src="https://www.handprint.com/HP/WCL/IMG/att2.gif"><br/>colormaking attributes</a></p>
-<p><a href="https://www.handprint.com/HP/WCL/color4.html"><img src="https://www.handprint.com/HP/WCL/IMG/rodint.jpg"><br/>adaptation, anchoring & contrast</a></p>
-<p><a href="https://www.handprint.com/HP/WCL/color5.html"><img src="https://www.handprint.com/HP/WCL/IMG/mixmatch.gif"><br/>additive & subtractive color mixing</a></p>
-<p><a href="https://www.handprint.com/HP/WCL/color6.html"><img src="https://www.handprint.com/HP/WCL/IMG/maxwell.gif"><br/>do "primary" colors exist?</a></p>
-<p><a href="https://www.handprint.com/HP/WCL/color7.html"><img src="https://www.handprint.com/HP/WCL/IMG/scgamut.gif"><br>modern color models</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color2.html"><img src="./images/bruce-macevoy-munzcs.gif" width="33%"><br/>the geometry of color perception. Bruce MacEvoy</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color3.html"><img src="./images/bruce-macevoy-att2.gif" width="33%"><br/>colormaking attributes - differences in hue. Bruce MacEvoy</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color4.html"><img src="./images/bruce-macevoy-rodint.jpg" width="33%"><br/>adaptation, anchoring & contrast - the contours of rod intrusion. Bruce MacEvoy</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color5.html"><img src="./images/bruce-macevoy-mixmatch.gif" width="33%"><br/>additive & subtractive color mixing - substance uncertainty in watercolor paint mixtures. Bruce MacEvoy</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color6.html"><img src="./images/bruce-macevoy-maxwell.gif" width="33%"><br/>do "primary" colors exist? - james clerk maxwell's "diagram of colors". Bruce MacEvoy</a></p>
+<p><a href="https://www.handprint.com/HP/WCL/color7.html"><img src="./images/bruce-macevoy-scgamut.gif" width="33%"><br>modern color models - maximum chroma of munsell color samples. Bruce MacEvoy</a></p>
