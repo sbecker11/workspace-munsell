@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "test_MunsellDataFrame",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "module": "unittest",
             "args": ["-v", "tests.test_MunsellDataFrame"],
@@ -12,7 +12,7 @@
         },
         {
             "name": "test_MunsellDataFrame with coverage",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "module": "coverage",
             "args": ["run", "-m", "unittest", "tests.test_MunsellDataFrame"],
@@ -25,7 +25,7 @@
         },
         {
             "name": "parquet_file_macro_from_excel_file_macro",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "excel_file_macro/parquet_file_macro_from_excel_file_macro.py",
             "args": ["--dir","excel_file_macro"],
@@ -34,7 +34,7 @@
         },
         {
             "name": "parquet_file_long_from_excel_file_long",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "excel_file_long/parquet_file_long_from_excel_file_long.py",
             "args": ["--dir","excel_file_long"],
@@ -43,7 +43,7 @@
         },
         {
             "name": "js_file_macro_from_parquet_file_macro",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "javascript/js_file_from_parquet_file.py",
             "args": ["--dir","excel_file_macro","--j", "js_file_macro.js", "--p", "parquet_file_macro.parquet"],
@@ -52,7 +52,7 @@
         },
         {
             "name": "js_file_long_from_parquet_file_long",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "javascript/js_file_from_parquet_file.py",
             "args": ["--dir","excel_file_long","--j", "js_file_long.js", "--p", "parquet_file_long.parquet"],
@@ -61,7 +61,7 @@
         },
         {
             "name": "hue_page_images_from_parquet_file_macro",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "hue_pages/hue_page_images_from_parquet_file.py",
             "args": ["--o","excel_file_macro/hue_page_images","--p", "excel_file_macro/parquet_file_macro.parquet"],
@@ -70,7 +70,7 @@
         },
         {
             "name": "hue_page_images_from_parquet_file_long",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "hue_pages/hue_page_images_from_parquet_file.py",
             "args": ["--o","excel_file_long/hue_page_images","--p", "excel_file_long/parquet_file_long.parquet"],
@@ -79,7 +79,7 @@
         },
         {
             "name": "histgrams_from_excel_file_macro",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "histogram/histograms_from_parquet_file.py",
             "args": ["--p", "excel_file_macro/parquet_file_macro.parquet"],
@@ -88,7 +88,7 @@
         },
         {
             "name": "histgrams_from_parquet_file_long",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "histogram/histograms_from_parquet_file.py",
             "args": ["--p", "excel_file_long/parquet_file_long.parquet"],
@@ -97,7 +97,7 @@
         },
         {
             "name": "animate-excel-file-long-hue-page-images",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "animate/animate_hue_page_images.py",
             "args": [
@@ -110,7 +110,7 @@
         },
         {
             "name": "animate-excel-file-macro-hue-page-images",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "animate/animate_hue_page_images.py",
             "args": [

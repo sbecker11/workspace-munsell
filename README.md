@@ -1,7 +1,7 @@
 # Virtual 3-D Munsell Color Tree		
 The objective of this project is to exend this work done by Andrew Worth: 	
 
-<a href="http://www.andrewwerth.com/color/"><img src="https://shawn.beckerstudio.com/wp-content/uploads/2023/07/munsell-color-wheel.png" width=33% height=33%><br/>Virtual Munsell Color Wheel<br/> by Andrew Werth © 2023<br/>All rights reserved.</a>
+<a href="http://www.andrewwerth.com/color/"><img src="./images/munsell-color-wheel.png" width=33%/><br/>Virtual Munsell Color Wheel<br/> by Andrew Werth © 2023<br/>All rights reserved.</a>
 
 To a 3-D virtual app that approximates The Pantone Munsell Color Tree:
 
@@ -85,20 +85,19 @@ This example Munsell Color Key is at row `2689`, column `F` in the `Conversion L
 
 ## Implementation
 
-Matthew Davis uses Vanilla javascript (not three.js) to create this magnificent orthographic viewer of a random collection of RGB color cubes.
-
-![3D color selector by Matthew Davis](https://shawn.beckerstudio.com/wp-content/uploads/2023/07/color-selector-50.gif)
-
-  <span>See the  <a href="https://codepen.io/gametroll/pen/jOQyYZN">full screen 3D color selector Pen</a>
-   on <a href="https://codepen.io">CodePen</a>.
+Matthew Davis uses Vanilla javascript (not three.js) to create this magnificent orthographic viewer of a random collection of RGB color cubes.  See the   <a href="https://codepen.io/gametroll/pen/jOQyYZN" target="_blank">
+  full screen 3D color selector   
+  <img src="./images/matthew-davis-color-cubes.png"/></a>  
+   at <a href="https://codepen.io">CodePen</a>   
 
 For this project, we need to extend the model by replacing the 3D color cubes with flat ColorChips arranged as shown in each HuePage.
 
 ### HuePages and ColorChips
 
-This repo contains the `Munsell-to-RGB-Tables.xlsm` folder, which contains 40 png files, one for each HuePage. For example, this is `351-10.0RP.png`
+This repo contains the `Munsell-to-RGB-Tables.xlsm` folder, which contains 40 png files, one for each HuePage. For example, this is `351-10.0RP.png`  
 
-![351-10.0RP.png](https://shawn.beckerstudio.com/wp-content/uploads/2023/07/351-10.0RP-50.png)
+<img src="./.keep/HuePagesScanned/351-10.0RP.png" width=50%/>  
+
 
 Each filename has format:  
 ```
@@ -107,10 +106,10 @@ Each filename has format:
 so `351-10.0RP.png` decodes to  
 `degrees`=351, `Hue`=10.0, `HuePrefix`=RP 
 
-## The HuePages defined in the Munsell-to-RGB-Tables as an animated gif
+## The HuePages defined in the Munsell-to-RGB-Tables as an animated gif  
 
-<img src="movies/animated-25.gif"><br/>
-the Hue Pages of the Munsell Color Chart as an animated gif</a>
+<img src="./excel_file_macro/movies/animated.gif" width="50%"/>  
+
 
 ## The 3D model and the GreyShaft 
 
